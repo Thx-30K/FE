@@ -20,8 +20,8 @@ export default defineConfig({
         // 공용 변수/믹스인 파일을 여기에 등록
         // 모든 .scss 파일에서 @import 없이 $primary-color 등을 사용 가능
         additionalData: `
-          @import "@/styles/_variables.scss";
-          @import "@/styles/_function.scss";
+         @use "@/styles/_variables.scss" as *;
+          @use "@/styles/_function.scss" as *;
         `,
       },
     },
