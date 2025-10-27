@@ -1,8 +1,13 @@
 import React from 'react';
-import s from './styles/MainPage.module.scss';
+import s from './MainPage.module.scss';
+import MainTop from './components/MainTop';
 
 const MainPage = () => {
-  return <div className={s.mainContainer}></div>;
+  return (
+    <div className={s.mainContainer}>
+      <MainTop />
+    </div>
+  );
 };
 
 export default MainPage;
