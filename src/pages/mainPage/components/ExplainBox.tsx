@@ -17,6 +17,7 @@ const ExplainBox: React.FC<ExplainBoxProps> = ({
   subText,
   isImgLeft,
   imgSrc,
+  marginTop = '0',
   height = '0',
   imgTop = '0',
   textTop = '0',
@@ -31,7 +32,7 @@ const ExplainBox: React.FC<ExplainBoxProps> = ({
   return (
     <div
       className={`${s.explainBoxContainer} ${isImgLeft ? s.left : s.right}`}
-      style={{ height: height }}
+      style={{ height: height, marginTop: marginTop }}
     >
       <img src={imgSrc} className={s.explainImg} style={{ top: imgTop }} />
 
