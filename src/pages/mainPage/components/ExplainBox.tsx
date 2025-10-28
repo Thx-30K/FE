@@ -8,6 +8,8 @@ interface ExplainBoxProps {
   imgSrc: string;
   marginTop?: string;
   height: string;
+  imgTop?: string;
+  textTop?: string;
 }
 
 const ExplainBox: React.FC<ExplainBoxProps> = ({
@@ -15,8 +17,9 @@ const ExplainBox: React.FC<ExplainBoxProps> = ({
   subText,
   isImgLeft,
   imgSrc,
-  marginTop = '0',
   height = '0',
+  imgTop = '0',
+  textTop = '0',
 }) => {
   const alignMap: Record<string, string> = {
     left: s.alignLeft,
@@ -28,11 +31,14 @@ const ExplainBox: React.FC<ExplainBoxProps> = ({
   return (
     <div
       className={`${s.explainBoxContainer} ${isImgLeft ? s.left : s.right}`}
-      style={{ marginTop: marginTop, height: height }}
+      style={{ height: height }}
     >
-      <img src={imgSrc} className={s.explainImg} />
+      <img src={imgSrc} className={s.explainImg} style={{ top: imgTop }} />
 
-      <div className={`${s.explainTextContainer} ${alignClass}`}>
+      <div
+        className={`${s.explainTextContainer} ${alignClass}`}
+        style={{ top: textTop }}
+      >
         <p className={s.mainText}>{mainText}</p>
         <p className={s.subText}>{subText}</p>
       </div>
