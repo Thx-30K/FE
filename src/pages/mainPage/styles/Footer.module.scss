@@ -1,12 +1,12 @@
 .footerContainer {
   display: flex;
-  height: 400px;
-  padding: 93px 0 150px 120px;
-  gap: 63px;
+  height: vw(400px);
+  padding: vw(93px) 0 vw(150px) vw(120px);
+  gap: vw(63px);
 
   p {
     font-weight: 500;
-    font-size: 20px;
+    font-size: vw(20px);
     color: $color-white;
   }
 }

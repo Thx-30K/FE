@@ -27,33 +27,33 @@
   flex-direction: column;
   color: $color-white;
   z-index: 2;
-  gap: 30px;
+  gap: vw(30px);
 
   &.alignLeft {
     text-align: left;
     align-items: flex-start;
-    left: 80px;
+    left: vw(80px);
   }
 
   &.alignRight {
     text-align: right;
     align-items: flex-end;
-    right: 80px;
+    right: vw(80px);
   }
 
   .mainText {
-    font-size: 68px;
+    font-size: vw(68px);
     font-weight: 700;
     line-height: 120%;
     white-space: pre-line;
-    letter-spacing: -1.7px;
+    letter-spacing: vw(-1.7px);
   }
 
   .subText {
-    font-size: 40px;
+    font-size: vw(40px);
     font-weight: 500;
     line-height: 120%;
     white-space: pre-line;
-    letter-spacing: -1px;
+    letter-spacing: vw(-1px);
   }
 }

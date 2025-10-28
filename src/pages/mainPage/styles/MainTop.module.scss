@@ -1,5 +1,10 @@
 .topContainer {
-  @include flex(column, center, center, 63px);
-  height: 920px;
-  padding-top: 40px;
+  @include flex(column, center, center, vw(63px));
+  height: vw(920px);
+  padding-top: vw(40px);
+
+  img {
+    width: vw(529px);
+    height: vw(158px);
+  }
 }
