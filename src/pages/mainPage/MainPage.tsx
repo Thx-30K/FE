@@ -6,6 +6,7 @@ import ExplainBox from './components/ExplainBox';
 import RESEARCH from '../../assets/main/main-research.svg';
 import DASHBOARD from '../../assets/main/main-dashboard.svg';
 import CARD from '../../assets/main/main-card.svg';
+import MEMORY from '../../assets/main/main-memory.svg';
 
 const MainPage = () => {
   return (
@@ -51,6 +52,20 @@ const MainPage = () => {
           marginTop="-226px"
           imgTop="19px"
           textTop="711px"
+        />
+
+        {/* 검색 기록 관련 설명 */}
+        <ExplainBox
+          mainText="이전 검색 기록을
+          확인해 보세요!"
+          subText="전에 검색했던 질의를 모아서 보여드려요!
+          다시 검색하거나,
+          참고해서 다른 내용을 검색할 수 있어요."
+          isImgLeft={false}
+          imgSrc={MEMORY}
+          height="1080px"
+          textTop="399px"
+          imgTop="228px"
         />
       </div>
     </div>
