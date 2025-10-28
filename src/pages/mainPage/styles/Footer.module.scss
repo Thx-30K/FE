@@ -1,0 +1,12 @@
+.footerContainer {
+  display: flex;
+  height: 400px;
+  padding: 93px 0 150px 120px;
+  gap: 63px;
+
+  p {
+    font-weight: 500;
+    font-size: 20px;
+    color: $color-white;
+  }
+}

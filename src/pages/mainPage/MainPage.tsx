@@ -7,6 +7,7 @@ import RESEARCH from '../../assets/main/main-research.svg';
 import DASHBOARD from '../../assets/main/main-dashboard.svg';
 import CARD from '../../assets/main/main-card.svg';
 import MEMORY from '../../assets/main/main-memory.svg';
+import Footer from './components/Footer';
 
 const MainPage = () => {
   return (
@@ -68,6 +69,8 @@ const MainPage = () => {
           imgTop="228px"
         />
       </div>
+
+      <Footer />
     </div>
   );
 };
