@@ -5,6 +5,7 @@ import ExplainBox from './components/ExplainBox';
 
 import RESEARCH from '../../assets/main/main-research.svg';
 import DASHBOARD from '../../assets/main/main-dashboard.svg';
+import CARD from '../../assets/main/main-card.svg';
 
 const MainPage = () => {
   return (
@@ -23,7 +24,7 @@ const MainPage = () => {
         imgTop="161px"
       />
 
-      {/* 대시보드 관련 설명 */}
+      {/* 대시보드 및 카드 관련 설명 */}
       <div style={{ position: 'relative', overflow: 'visible' }}>
         <ExplainBox
           mainText="검색한 결과를 확인해 보세요!"
@@ -35,6 +36,21 @@ const MainPage = () => {
           height="1890px"
           textTop="380px"
           imgTop="177px"
+        />
+
+        <ExplainBox
+          mainText="이런 패널들은 어떤가요?
+          비교해 보세요!"
+          subText="기존 검색한 질의에서 사용자 특징 중 무엇을?
+          변경한 결과들이 담긴 카드를 제공해요.
+          
+          더 다양한 탐색군과 인사이트를 찾아드려요!"
+          isImgLeft={true}
+          imgSrc={CARD}
+          height="1820px"
+          marginTop="-226px"
+          imgTop="19px"
+          textTop="711px"
         />
       </div>
     </div>
