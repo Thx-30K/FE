@@ -1,0 +1,56 @@
+.explainBoxContainer {
+  width: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+}
+
+.left {
+  flex-direction: row; // 이미지 왼쪽, 텍스트 오른쪽
+}
+
+.right {
+  flex-direction: row-reverse; // 이미지 오른쪽, 텍스트 왼쪽
+}
+
+.explainImg {
+  position: absolute;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  z-index: 1;
+}
+
+.explainTextContainer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  color: $color-white;
+  z-index: 2;
+  gap: 30px;
+
+  &.alignLeft {
+    text-align: left;
+    align-items: flex-start;
+    left: 80px;
+  }
+
+  &.alignRight {
+    text-align: right;
+    align-items: flex-end;
+    right: 80px;
+  }
+
+  .mainText {
+    font-size: 68px;
+    font-weight: 700;
+    line-height: 120%;
+    white-space: pre-line;
+  }
+
+  .subText {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 120%;
+  }
+}
