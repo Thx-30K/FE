@@ -1,8 +1,8 @@
 .container {
-  @include flex($gap: 10px);
-  width: 1000px;
-  height: 78px;
-  padding: 7px 8px 7px 33px;
+  @include flex($gap: vw(10px));
+  width: vw(1000px);
+  height: vw(78px);
+  padding: vw(7px) vw(8px) vw(7px) vw(33px);
   border: none;
   border-radius: 50px;
   background: $color-white;
@@ -14,7 +14,7 @@
     background-color: transparent;
     color: #000;
     border: none;
-    font-size: rem(28px);
+    font-size: vw(28px);
     font-weight: 600;
     line-height: 120%;
     letter-spacing: -0.7px;
@@ -36,15 +36,15 @@
       filter: brightness(1.1);
       cursor: not-allowed;
     }
-    min-width: 64px;
-    min-height: 64px;
+    min-width: vw(64px);
+    min-height: vw(64px);
     border: none;
     border-radius: 50px;
     background: linear-gradient(270deg, $color-yellow 0%, $color-orange1 100%);
     box-shadow: 0 2.783px 2.783px 0 rgba(241, 157, 82, 0.6) inset;
     img {
-      width: 30px;
-      height: 30px;
+      width: vw(30px);
+      height: vw(30px);
     }
   }
 }

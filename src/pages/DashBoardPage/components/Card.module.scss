@@ -6,8 +6,8 @@
 
 .card {
   @include flex(column);
-  max-width: 312px;
-  height: 390px;
+  max-width: vw(312px);
+  height: vw(390px);
   width: 100%;
   border-radius: 30px 30px 0 0;
   background: linear-gradient(
@@ -16,11 +16,20 @@
       rgba(241, 157, 82, 0.2) 100%
     ),
     $color-white;
+
+  transition: all 0.5s ease;
+  &:hover {
+    transform: translateY(vw(-69px));
+    border-top: 1px solid #f19d52;
+    border-right: 1px solid #f19d52;
+    border-left: 1px solid #f19d52;
+    box-shadow: 0 -10px 30px 10px rgba(241, 157, 82, 0.35);
+  }
   .cardTop {
     position: relative;
     @include flex();
     width: 100%;
-    height: 225px;
+    height: vw(225px);
     img {
       border-radius: 30px 30px 0 0;
       background-color: $color-gray2;
@@ -34,14 +43,14 @@
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: 85px;
+      height: vw(85px);
       background: linear-gradient(
         0deg,
         rgba(40, 44, 72, 0.8) 0%,
         rgba(40, 44, 72, 0) 90.59%
       );
       color: $color-white;
-      font-size: 20px;
+      font-size: vw(20px);
       font-weight: 600;
       line-height: 120%; /* 24px */
       letter-spacing: -0.5px;
@@ -49,22 +58,22 @@
   }
 
   .cardBottom {
-    @include flex(column, flex-start, flex-start, 11px);
+    @include flex(column, flex-start, flex-start, vw(11px));
     flex: 1 1 0;
     width: 100%;
-    padding-top: 12px;
+    padding-top: vw(12px);
     .cardTags {
-      @include flex($align-items: flex-start, $gap: 20px);
+      @include flex($align-items: flex-start, $gap: vw(20px));
       width: 100%;
       .cardTag {
         @include flex();
         @include cardFill();
-        padding: 5px 14px;
+        padding: vw(5px) vw(14px);
         justify-content: center;
         align-items: center;
         color: $color-black;
         text-align: center;
-        font-size: 14px;
+        font-size: vw(14px);
         font-weight: 600;
         line-height: 120%; /* 16.8px */
         letter-spacing: -0.35px;
@@ -72,22 +81,22 @@
     }
 
     .cardInfo {
-      @include flex(column, flex-start, flex-start, 15px);
-      width: 253px;
+      @include flex(column, flex-start, flex-start, vw(15px));
+      width: vw(253px);
       height: 100%;
       border-radius: 0 25px 0 0;
       background: rgba($color-orange1, 0.1);
-      padding: 16px 14px 0 14px;
+      padding: vw(16px) vw(14px) 0 vw(14px);
       .cardCount {
         color: $color-black;
-        font-size: 1rem;
+        font-size: vw(16px);
         font-weight: 600;
         line-height: 120%; /* 19.2px */
         letter-spacing: -0.4px;
 
         span {
           font-weight: 600;
-          font-size: 14px;
+          font-size: vw(14px);
 
           span {
             color: $color-orange1;
@@ -100,7 +109,7 @@
         @include cardFill();
         @include hoverEvent();
         width: 100%;
-        padding: 5px 0 5px 0;
+        padding: vw(5px) 0 vw(5px) 0;
       }
     }
   }
