@@ -23,9 +23,11 @@ const MainPage = () => {
           subText="원하는 타겟이 있으신가요? 바로 검색해 보세요!"
           isImgLeft={true}
           imgSrc={RESEARCH}
-          height="1008px"
-          textTop="284px"
-          imgTop="161px"
+          height={1008}
+          textTop={284}
+          imgTop={161}
+          imgWidth={1112}
+          imgHeight={686}
         />
       </ScrollMotion>
 
@@ -39,9 +41,11 @@ const MainPage = () => {
           어떠한 인사이트를 찾고 있는지 한눈에 보여드릴게요!"
             isImgLeft={false}
             imgSrc={DASHBOARD}
-            height="1890px"
-            textTop="380px"
-            imgTop="177px"
+            height={1890}
+            textTop={380}
+            imgTop={177}
+            imgWidth={1174}
+            imgHeight={1690.21}
           />
         </ScrollMotion>
 
@@ -55,10 +59,12 @@ const MainPage = () => {
           더 다양한 탐색군과 인사이트를 찾아드려요!"
             isImgLeft={true}
             imgSrc={CARD}
-            height="1820px"
-            marginTop="-226px"
-            imgTop="19px"
-            textTop="711px"
+            height={1820}
+            marginTop={-226}
+            imgTop={19}
+            textTop={711}
+            imgWidth={1187}
+            imgHeight={1700}
           />
         </ScrollMotion>
 
@@ -72,9 +78,11 @@ const MainPage = () => {
           참고해서 다른 내용을 검색할 수 있어요."
             isImgLeft={false}
             imgSrc={MEMORY}
-            height="1080px"
-            textTop="399px"
-            imgTop="228px"
+            height={1080}
+            textTop={399}
+            imgTop={228}
+            imgWidth={1231}
+            imgHeight={738}
           />
         </ScrollMotion>
       </div>
