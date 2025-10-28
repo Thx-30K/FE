@@ -1,17 +1,17 @@
 <svg width="1920" height="6893" viewBox="0 0 1920 6893" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_8_9554)">
+<g clip-path="url(#clip0_69_2092)">
 <rect width="1920" height="6893" fill="#0C0F29"/>
-<path d="M0 6282C337.446 6282 611 6555.55 611 6893H0V6282Z" fill="#FBFBC7" fill-opacity="0.1"/>
-<g filter="url(#filter0_f_8_9554)">
+<path d="M0 6282V6282C337.446 6282 611 6555.55 611 6893V6893H0V6282Z" fill="#FBFBC7" fill-opacity="0.1"/>
+<g filter="url(#filter0_f_69_2092)">
 <rect x="1383" y="4199" width="693" height="693" rx="346.5" transform="rotate(90 1383 4199)" fill="#FBFBC7" fill-opacity="0.1"/>
 </g>
-<g filter="url(#filter1_f_8_9554)">
-<rect x="1811" y="-656" width="1311" height="1701" rx="655.5" transform="rotate(90 1811 -656)" fill="url(#paint0_radial_8_9554)" fill-opacity="0.8"/>
+<g filter="url(#filter1_f_69_2092)">
+<rect x="1811" y="-656" width="1311" height="1701" rx="655.5" transform="rotate(90 1811 -656)" fill="url(#paint0_radial_69_2092)" fill-opacity="0.8"/>
 </g>
-<g filter="url(#filter2_f_8_9554)">
+<g filter="url(#filter2_f_69_2092)">
 <rect x="849" y="5242" width="275" height="275" rx="137.5" transform="rotate(90 849 5242)" fill="#FBFBC7" fill-opacity="0.1"/>
 </g>
-<g filter="url(#filter3_f_8_9554)">
+<g filter="url(#filter3_f_69_2092)">
 <rect x="1044" y="1510" width="427" height="427" rx="213.5" transform="rotate(90 1044 1510)" fill="#FBFBC7" fill-opacity="0.1"/>
 </g>
 <rect x="688" y="889" width="71" height="71" rx="35.5" transform="rotate(90 688 889)" fill="#FBFBC7" fill-opacity="0.2"/>
@@ -22,39 +22,48 @@
 <rect x="1055" y="6218" width="237" height="237" rx="118.5" transform="rotate(90 1055 6218)" fill="#FBFBC7" fill-opacity="0.1"/>
 <rect x="142" y="5751" width="125" height="125" rx="62.5" transform="rotate(90 142 5751)" fill="#FBFBC7" fill-opacity="0.1"/>
 <rect x="901" y="2536" width="135" height="135" rx="67.5" transform="rotate(90 901 2536)" fill="#FBFBC7" fill-opacity="0.1"/>
-<rect width="1925" height="6893" transform="translate(-5)" fill="url(#paint1_linear_8_9554)" fill-opacity="0.25"/>
+<g clip-path="url(#clip1_69_2092)">
+<rect width="1925" height="6893" transform="translate(-5)" fill="url(#paint1_linear_69_2092)" fill-opacity="0.25"/>
+<path d="M1585.9 6892.9H1711C1664.81 6709.79 1583.74 6623.76 1533.27 6593.78C1527.81 6590.54 1523.32 6597.08 1527.19 6602.12C1588.5 6681.95 1585.9 6821.05 1585.9 6892.9Z" fill="#F19D52" fill-opacity="0.6"/>
+<path d="M1754.35 6893.2H1677.8C1704.43 6762.24 1750.03 6696.71 1781.04 6670.55C1785.79 6666.54 1790.49 6671.91 1787.43 6677.32C1752.85 6738.55 1754.35 6840.09 1754.35 6893.2Z" fill="#F19D52" fill-opacity="0.6"/>
+<path d="M1551.5 6962L1611 6916.5C1600.7 6860.85 1543.22 6809.25 1496.13 6786.43C1490.22 6783.57 1486.62 6790.41 1491.52 6794.77C1553.86 6850.24 1551.5 6903.39 1551.5 6962Z" fill="#F19D52" fill-opacity="0.6"/>
+</g>
+<line x1="-230" y1="3591.5" x2="2105.45" y2="3591.5" stroke="#FF0000"/>
 </g>
 <defs>
-<filter id="filter0_f_8_9554" x="590" y="4099" width="893" height="893" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter0_f_69_2092" x="590" y="4099" width="893" height="893" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_8_9554"/>
+<feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_69_2092"/>
 </filter>
-<filter id="filter1_f_8_9554" x="-30" y="-796" width="1981" height="1591" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter1_f_69_2092" x="-30" y="-796" width="1981" height="1591" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="70" result="effect1_foregroundBlur_8_9554"/>
+<feGaussianBlur stdDeviation="70" result="effect1_foregroundBlur_69_2092"/>
 </filter>
-<filter id="filter2_f_8_9554" x="474" y="5142" width="475" height="475" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter2_f_69_2092" x="474" y="5142" width="475" height="475" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_8_9554"/>
+<feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_69_2092"/>
 </filter>
-<filter id="filter3_f_8_9554" x="517" y="1410" width="627" height="627" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<filter id="filter3_f_69_2092" x="517" y="1410" width="627" height="627" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
 <feFlood flood-opacity="0" result="BackgroundImageFix"/>
 <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_8_9554"/>
+<feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_69_2092"/>
 </filter>
-<radialGradient id="paint0_radial_8_9554" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(2467 194.5) scale(680 882.288)">
+<radialGradient id="paint0_radial_69_2092" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(2467 194.5) scale(680 882.288)">
 <stop stop-color="#FBFBC7"/>
 <stop offset="1" stop-color="#959576" stop-opacity="0"/>
 </radialGradient>
-<linearGradient id="paint1_linear_8_9554" x1="0" y1="3446.5" x2="1925" y2="3446.5" gradientUnits="userSpaceOnUse">
+<linearGradient id="paint1_linear_69_2092" x1="0" y1="3446.5" x2="1925" y2="3446.5" gradientUnits="userSpaceOnUse">
 <stop stop-color="#0C0F29" stop-opacity="0.7"/>
 <stop offset="1" stop-color="#F19D52" stop-opacity="0.8"/>
 </linearGradient>
-<clipPath id="clip0_8_9554">
+<clipPath id="clip0_69_2092">
 <rect width="1920" height="6893" fill="white"/>
+</clipPath>
+<clipPath id="clip1_69_2092">
+<rect width="1925" height="6893" fill="white" transform="translate(-5)"/>
 </clipPath>
 </defs>
 </svg>
