@@ -110,6 +110,11 @@
         @include hoverEvent();
         width: 100%;
         padding: vw(5px) 0 vw(5px) 0;
+        color: $color-black;
+        font-size: vw(14px);
+        font-weight: 600;
+        line-height: 120%; /* 16.8px */
+        letter-spacing: -0.35px;
       }
     }
   }
