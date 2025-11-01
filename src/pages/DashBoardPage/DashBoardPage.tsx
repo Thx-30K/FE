@@ -2,6 +2,7 @@ import { logo } from '@/assets';
 import styles from './DashBoardPage.module.scss';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { Card } from './components/Card';
+import { DoughnutChart } from './components/DoughnutChart';
 
 export const DashBoardPage = () => {
   const handleSearch = (query: string) => {
@@ -39,7 +40,10 @@ export const DashBoardPage = () => {
       <div className={styles.middleContent}>
         <div className={styles.doughnutContainer}>
           <div className={styles.doughnutTitle}>{'검색 결과'}</div>
-          <div className={styles.doughnutSection}>{/* 차트 들어갈 곳 */}</div>
+          <div className={styles.doughnutSection}>
+            {/* 차트 들어갈 곳 */}
+            <DoughnutChart />
+          </div>
         </div>
         <div className={styles.barContainer}>
           <div className={styles.barSection}>
