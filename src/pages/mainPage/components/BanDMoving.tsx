@@ -49,7 +49,7 @@ const BanDMoving: React.FC<BanDMovingProps> = ({
         left,
         overflow: 'visible',
         pointerEvents: 'none',
-        zIndex: 0,
+        zIndex: 9999,
       }}
     >
       <path ref={pathRef} d={pathData} fill="none" />
@@ -69,6 +69,7 @@ const BanDMoving: React.FC<BanDMovingProps> = ({
           duration,
           repeat: Infinity,
         }}
+        viewport={{ amount: 0.1, once: false }}
       />
     </svg>
   );
