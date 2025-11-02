@@ -16,7 +16,6 @@ const options: ChartOptions<'doughnut'> = {
   responsive: true,
   cutout: '30%',
   circumference: 360,
-
   animation: {
     animateScale: true,
     animateRotate: true,
@@ -27,8 +26,7 @@ const options: ChartOptions<'doughnut'> = {
       position: 'center',
     },
     title: {
-      display: true,
-      text: 'Chart.js / react-chartjs-2 시작하기',
+      display: false,
     },
   },
 };

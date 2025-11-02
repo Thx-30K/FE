@@ -2,7 +2,8 @@ import { logo } from '@/assets';
 import styles from './DashBoardPage.module.scss';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { Card } from './components/Card';
-import { DoughnutChart } from './components/DoughnutChart';
+import { DoughnutChart } from './components/charts/DoughnutChart';
+import { LineAreaChart } from './components/charts/LineAreaChart';
 
 export const DashBoardPage = () => {
   const handleSearch = (query: string) => {
@@ -48,7 +49,10 @@ export const DashBoardPage = () => {
         <div className={styles.barContainer}>
           <div className={styles.barSection}>
             <div className={styles.barTitle}>{'나이대별 평균 소득'}</div>
-            <div className={styles.barContent}>{/* 차트 들어갈 곳 */}</div>
+            <div className={styles.barContent}>
+              {/* 차트 들어갈 곳 */}
+              <LineAreaChart />
+            </div>
           </div>
           <div className={styles.barSection}>
             <div className={styles.barTitle}>{'바 차트 이름'}</div>
