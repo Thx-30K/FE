@@ -81,7 +81,6 @@ const MainPage = () => {
             height={1080}
             textTop={399}
             imgTop={228}
-            imgWidth={1231}
             imgHeight={738}
           />
         </ScrollMotion>
