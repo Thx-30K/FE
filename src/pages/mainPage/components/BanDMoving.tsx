@@ -34,6 +34,8 @@ const BanDMoving: React.FC<BanDMovingProps> = ({
   const y = useTransform(progress, (p: number) => getPoint(p).y - 25);
   const rotate = useTransform(progress, (p: number) => p * 360);
 
+  const opacity = useTransform(scrollYProgress, [0.85, 0.95, 1], [1, 0, 0]);
+
   return (
     <svg
       viewBox="0 0 1451 6297"
@@ -60,6 +62,7 @@ const BanDMoving: React.FC<BanDMovingProps> = ({
           translateX: x,
           translateY: y,
           rotate,
+          opacity,
         }}
         transition={{
           ease: 'linear',
