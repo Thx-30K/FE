@@ -26,21 +26,13 @@ const ScrollMotion: React.FC<ScrollMotionProps> = ({
     <motion.div
       initial={{ opacity: 0, ...directionMap }}
       animate={controls}
-      onViewportEnter={() =>
-        controls.start({
-          opacity: 1,
-          x: 0,
-          y: 0,
-          transition: { ease: 'easeOut', duration: 1, delay },
-        })
-      }
-      onViewportLeave={() =>
-        controls.start({
-          opacity: 0,
-          transition: { ease: 'easeInOut', duration: 1.5 }, // 👈 사라질 때 천천히
-        })
-      }
-      viewport={{ once: false, amount: 0.25 }}
+      whileInView={{
+        opacity: 1,
+        x: 0,
+        y: 0,
+        transition: { ease: 'easeOut', duration: 1, delay },
+      }}
+      viewport={{ once: false, amount: 0.1 }}
     >
       {children}
     </motion.div>

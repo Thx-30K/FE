@@ -56,7 +56,7 @@ const ExplainBox: React.FC<ExplainBoxProps> = ({
       </ScrollMotion>
 
       {/* 텍스트 */}
-      <ScrollMotion direction={isImgLeft ? 'left' : 'right'} delay={0.25}>
+      <ScrollMotion direction={isImgLeft ? 'left' : 'right'} delay={0}>
         <div
           className={`${s.explainTextContainer} ${alignClass}`}
           style={{ top: vw(textTop) }}
