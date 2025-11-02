@@ -1,5 +1,6 @@
 import React from 'react';
 import s from '../styles/ExplainBox.module.scss';
+import ScrollMotion from './ScrollMotion';
 
 interface ExplainBoxProps {
   mainText: string;
@@ -39,21 +40,31 @@ const ExplainBox: React.FC<ExplainBoxProps> = ({
   return (
     <div
       className={`${s.explainBoxContainer} ${isImgLeft ? s.left : s.right}`}
-      style={{ height: height, marginTop: marginTop }}
+      style={{ height, marginTop }}
     >
-      <img
-        src={imgSrc}
-        className={s.explainImg}
-        style={{ top: vw(imgTop), width: vw(imgWidth), height: vw(imgHeight) }}
-      />
+      {/* 이미지 */}
+      <ScrollMotion direction={isImgLeft ? 'right' : 'left'}>
+        <img
+          src={imgSrc}
+          className={s.explainImg}
+          style={{
+            top: vw(imgTop),
+            width: vw(imgWidth),
+            height: vw(imgHeight),
+          }}
+        />
+      </ScrollMotion>
 
-      <div
-        className={`${s.explainTextContainer} ${alignClass}`}
-        style={{ top: vw(textTop) }}
-      >
-        <p className={s.mainText}>{mainText}</p>
-        <p className={s.subText}>{subText}</p>
-      </div>
+      {/* 텍스트 */}
+      <ScrollMotion direction={isImgLeft ? 'left' : 'right'} delay={0.25}>
+        <div
+          className={`${s.explainTextContainer} ${alignClass}`}
+          style={{ top: vw(textTop) }}
+        >
+          <p className={s.mainText}>{mainText}</p>
+          <p className={s.subText}>{subText}</p>
+        </div>
+      </ScrollMotion>
     </div>
   );
 };

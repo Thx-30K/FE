@@ -1,8 +1,9 @@
 .explainBoxContainer {
   width: 100%;
   display: flex;
-  position: relative;
   align-items: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .left {
@@ -14,31 +15,34 @@
 }
 
 .explainImg {
-  position: absolute;
+  flex-shrink: 0;
   width: auto;
   max-width: 100%;
   object-fit: contain;
   z-index: 1;
+  transform: translateY(0);
 }
 
 .explainTextContainer {
-  position: absolute;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   color: $color-white;
   z-index: 2;
   gap: vw(30px);
+  max-width: 100%;
+  transform: translateY(0);
 
   &.alignLeft {
     text-align: left;
     align-items: flex-start;
-    left: vw(80px);
+    margin-left: vw(80px);
   }
 
   &.alignRight {
     text-align: right;
     align-items: flex-end;
-    right: vw(80px);
+    padding-right: vw(80px);
   }
 
   .mainText {
