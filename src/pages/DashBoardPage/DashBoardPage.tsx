@@ -4,6 +4,7 @@ import { SearchBar } from '@/components/SearchBar/SearchBar';
 import { Card } from './components/Card';
 import { DoughnutChart } from './components/charts/DoughnutChart';
 import { LineAreaChart } from './components/charts/LineAreaChart';
+import { BarChart } from './components/charts/BarChart';
 
 export const DashBoardPage = () => {
   const handleSearch = (query: string) => {
@@ -56,7 +57,10 @@ export const DashBoardPage = () => {
           </div>
           <div className={styles.barSection}>
             <div className={styles.barTitle}>{'바 차트 이름'}</div>
-            <div className={styles.barContent}>{/* 차트 들어갈 곳 */}</div>
+            <div className={styles.barContent}>
+              {/* 차트 들어갈 곳 */}
+              <BarChart />
+            </div>
           </div>
         </div>
         <div className={styles.blankBox}></div>

@@ -153,6 +153,7 @@
           backdrop-filter: blur(50px);
         }
         .barContent {
+          @include flex();
           @include glassBorder();
 
           width: 100%;
