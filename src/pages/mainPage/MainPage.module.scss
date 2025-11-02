@@ -1,6 +1,8 @@
 .mainContainer {
+  position: relative;
   width: 100%;
   background: url('@/assets/main/background-img.svg') top center / cover
     no-repeat;
   aspect-ratio: 1920 / 6893;
+  z-index: 1000;
 }
