@@ -1,9 +1,5 @@
-import {
-  motion,
-  useMotionValue,
-  useAnimationFrame,
-  useTransform,
-} from 'framer-motion';
+import { motion, useMotionValue, useScroll, useTransform } from 'framer-motion';
+
 import { useRef } from 'react';
 import BAND from '@/assets/main/BanD.svg';
 
@@ -21,12 +17,9 @@ const BanDMoving: React.FC<BanDMovingProps> = ({
   left = '0',
 }) => {
   const pathRef = useRef<SVGPathElement>(null);
-  const progress = useMotionValue(0);
 
-  // 진행도 계산
-  useAnimationFrame((t) => {
-    progress.set((t / (duration * 1000)) % 1);
-  });
+  const { scrollYProgress } = useScroll();
+  const progress = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   // 현재 진행도에 따른 좌표
   const getPoint = (p: number) => {
@@ -42,7 +35,6 @@ const BanDMoving: React.FC<BanDMovingProps> = ({
   const rotate = useTransform(progress, (p: number) => p * 360);
 
   return (
-    // 경로 svg 내의 정보
     <svg
       viewBox="0 0 1451 6297"
       width="1451"
