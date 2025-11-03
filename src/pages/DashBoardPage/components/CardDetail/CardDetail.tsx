@@ -4,6 +4,7 @@ import { DoughnutChart } from '../charts/DoughnutChart';
 import { LineAreaChart } from '../charts/LineAreaChart';
 import styles from './CardDetail.module.scss';
 import { cardCloseIcon } from '@/assets';
+import { ExportSelect } from '../ExportSelect/ExportSelect';
 
 export const CardDetail = ({ data, onClick }: CardProps) => {
   return (
@@ -52,13 +53,8 @@ export const CardDetail = ({ data, onClick }: CardProps) => {
         <div className={styles.bottomContent}>
           <div className={styles.bottomTitle}>
             <span className={styles.resultCount}>검색된 패널 : {100}명</span>
-            {/* TODO: 추후 드롭다운으로 변경 */}
             <div className={styles.exportContainer}>
-              <div className={styles.exports}>
-                <div className={styles.exportOption}>.csv</div>
-                <div className={styles.exportOption}>.pdf</div>
-                <div className={styles.exportOption}>.xlsx</div>
-              </div>
+              <ExportSelect />
               <div className={styles.exportButton}>내보내기</div>
             </div>
           </div>

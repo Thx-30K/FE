@@ -212,27 +212,31 @@
         width: 100%;
         padding: vw(11px) vw(69px) vw(11px) 0;
         border-radius: 0 50px 50px 0;
+        backdrop-filter: blur(20px);
       }
 
       .exportContainer {
+        position: relative;
         color: $color-gray2;
         font-size: vw(24px);
-        transform: translateX(-30px);
+        transform: translateX(vw(-290px));
+        transition: transform 0.5s ease;
         @include flex();
-        .exports {
-          @include flex(column);
-          background: #593d36;
-          .exportOption {
-          }
+        &:hover {
+          transform: translateX(vw(-60px));
         }
         .exportButton {
+          @include flex();
           @include glassTitle();
           color: $color-gray2;
           font-size: vw(24px);
           font-weight: 500;
           border-radius: 0 50px 50px 0;
-          width: vw(131px);
+          width: vw(141px);
+          height: vw(56px);
+          backdrop-filter: blur(10px);
           padding: vw(11px) vw(18px);
+          transition: all 0.3s ease;
           &:hover {
             color: $color-white;
           }

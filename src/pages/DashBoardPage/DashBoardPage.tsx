@@ -8,6 +8,7 @@ import { BarChart } from './components/charts/BarChart';
 import { useState } from 'react';
 import { CardDetail } from './components/CardDetail/CardDetail';
 import type { SearchData } from '@/types/Card';
+import { ExportSelect } from './components/ExportSelect/ExportSelect';
 
 export const DashBoardPage = () => {
   const [cardDetailVisible, setCardDetailVisible] = useState(false);
@@ -86,13 +87,8 @@ export const DashBoardPage = () => {
       <div className={styles.bottomContent}>
         <div className={styles.bottomTitle}>
           <span className={styles.resultCount}>검색된 패널 : {100}명</span>
-          {/* TODO: 추후 드롭다운으로 변경 */}
           <div className={styles.exportContainer}>
-            <div className={styles.exports}>
-              <div className={styles.exportOption}>.csv</div>
-              <div className={styles.exportOption}>.pdf</div>
-              <div className={styles.exportOption}>.xlsx</div>
-            </div>
+            <ExportSelect />
             <div className={styles.exportButton}>내보내기</div>
           </div>
         </div>
