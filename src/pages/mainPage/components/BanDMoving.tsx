@@ -1,6 +1,6 @@
-import { motion, useMotionValue, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BAND from '@/assets/main/BanD.svg';
 
 interface BanDMovingProps {
@@ -36,6 +36,12 @@ const BanDMoving: React.FC<BanDMovingProps> = ({
 
   const opacity = useTransform(scrollYProgress, [0.85, 0.95, 1], [1, 0, 0]);
 
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    if (pathRef.current) setIsReady(true);
+  }, []);
+
   return (
     <svg
       viewBox="0 0 1451 6297"
@@ -54,23 +60,25 @@ const BanDMoving: React.FC<BanDMovingProps> = ({
     >
       <path ref={pathRef} d={pathData} fill="none" />
 
-      <motion.image
-        href={BAND}
-        width={`${(231 / 1920) * 100}vw`}
-        height={`${(157 / 1920) * 100}vw`}
-        style={{
-          translateX: x,
-          translateY: y,
-          rotate,
-          opacity,
-        }}
-        transition={{
-          ease: 'linear',
-          duration,
-          repeat: Infinity,
-        }}
-        viewport={{ amount: 0.1, once: false }}
-      />
+      {isReady && (
+        <motion.image
+          href={BAND}
+          width={`${(231 / 1920) * 100}vw`}
+          height={`${(157 / 1920) * 100}vw`}
+          style={{
+            translateX: x,
+            translateY: y,
+            rotate,
+            opacity,
+          }}
+          transition={{
+            ease: 'linear',
+            duration,
+            repeat: Infinity,
+          }}
+          viewport={{ amount: 0.1, once: false }}
+        />
+      )}
     </svg>
   );
 };
