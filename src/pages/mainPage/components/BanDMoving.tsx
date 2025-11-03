@@ -34,7 +34,11 @@ const BanDMoving: React.FC<BanDMovingProps> = ({
   const y = useTransform(progress, (p: number) => getPoint(p).y - 25);
   const rotate = useTransform(progress, (p: number) => p * 360);
 
-  const opacity = useTransform(scrollYProgress, [0.85, 0.95, 1], [1, 0, 0]);
+  const opacity = useTransform(
+    scrollYProgress,
+    [0, 0.05, 0.85, 1],
+    [0, 1, 1, 0],
+  );
 
   const [isReady, setIsReady] = useState(false);
 
