@@ -10,7 +10,7 @@
   padding-right: vw(16.78px);
   background: linear-gradient(
     270deg,
-    #fbfbc7 24.25%,
+    $color-yellow 24.25%,
     rgba(241, 157, 82, 0.6) 100%
   );
   box-shadow: 0 vw(4px) vw(4px) 0 rgba(241, 157, 82, 0.6) inset;
@@ -62,7 +62,7 @@
       rgba(12, 15, 41, 0.4) 0%,
       rgba(241, 157, 82, 0.24) 100%
     ),
-    #282c48;
+    $color-navy1;
   box-shadow: vw(10px) 0 vw(50px) 0 rgba(241, 157, 82, 0.2);
 
   display: flex;
@@ -94,8 +94,7 @@
   }
 
   .headerTitle {
-    color: #fdfdfd;
-    font-family: Pretendard;
+    color: $color-white;
     font-size: vw(28px);
     font-style: normal;
     font-weight: 600;
@@ -110,8 +109,7 @@
     gap: vw(5px);
 
     .subText {
-      color: #d9d9d9;
-      font-family: Pretendard;
+      color: $color-gray2;
       font-size: vw(28px);
       font-style: normal;
       font-weight: 500;
@@ -136,7 +134,7 @@
   flex-shrink: 0;
   background: linear-gradient(
     270deg,
-    #fbfbc7 24.25%,
+    $color-yellow 24.25%,
     rgba(241, 157, 82, 0.6) 100%
   );
   box-shadow: 0 vw(4px) vw(4px) 0 rgba(241, 157, 82, 0.6) inset;
@@ -165,9 +163,9 @@
     align-items: flex-start;
     gap: vw(4px);
     border-radius: 0 vw(30px) vw(30px) 0;
-    border-top: vw(1px) solid #b7b7b7;
-    border-right: vw(1px) solid #b7b7b7;
-    border-bottom: vw(1px) solid #b7b7b7;
+    border-top: vw(1px) solid $color-gray1;
+    border-right: vw(1px) solid $color-gray1;
+    border-bottom: vw(1px) solid $color-gray1;
     background: linear-gradient(
       90deg,
       rgba(12, 15, 41, 0.17) 0%,
@@ -175,8 +173,7 @@
     );
 
     .historyTitle {
-      color: #fdfdfd;
-      font-family: Pretendard;
+      color: $color-white;
       font-size: vw(28px);
       font-style: normal;
       font-weight: 500;
@@ -189,8 +186,7 @@
       gap: vw(18px);
 
       .keywordText {
-        color: #fdfdfd;
-        font-family: Pretendard;
+        color: $color-white;
         font-size: vw(22px);
         font-style: normal;
         font-weight: 600;
