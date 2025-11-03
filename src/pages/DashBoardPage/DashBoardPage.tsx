@@ -1,18 +1,30 @@
 import { logo } from '@/assets';
 import styles from './DashBoardPage.module.scss';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
-import { Card } from './components/Card';
+import { Card } from './components/Card/Card';
 import { DoughnutChart } from './components/charts/DoughnutChart';
 import { LineAreaChart } from './components/charts/LineAreaChart';
 import { BarChart } from './components/charts/BarChart';
+import { useState } from 'react';
+import { CardDetail } from './components/CardDetail/CardDetail';
+import type { SearchData } from '@/types/Card';
 
 export const DashBoardPage = () => {
+  const [cardDetailVisible, setCardDetailVisible] = useState(false);
+
   const handleSearch = (query: string) => {
     console.log('Search query:', query);
   };
 
   return (
     <div className={styles.container}>
+      {/* 카드 클릭 시 */}
+      {cardDetailVisible && (
+        <CardDetail
+          data={cards[0]}
+          onClick={() => setCardDetailVisible(false)}
+        />
+      )}
       {/* 검색 및 카드 영역 */}
       <div className={styles.topContent}>
         <img src={logo} className={styles.logo} alt="Logo" />
@@ -33,7 +45,11 @@ export const DashBoardPage = () => {
           </div>
           <div className={styles.cardList}>
             {cards.map((card) => (
-              <Card key={card.id} card={card} />
+              <Card
+                key={card.id}
+                data={card}
+                onClick={() => setCardDetailVisible(true)}
+              />
             ))}
           </div>
         </div>
@@ -140,7 +156,7 @@ export const DashBoardPage = () => {
 };
 
 const tags = ['여자', '남자', '20대', '30대'];
-const cards = [
+const cards: SearchData[] = [
   {
     id: 1,
     tags: ['여자', '남자', '20대', '30대'],
