@@ -1,0 +1,114 @@
+.openButton {
+  position: fixed;
+  top: vw(193px);
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: vw(167px);
+  height: vw(68px);
+  padding-right: vw(16.78px);
+  background: linear-gradient(
+    270deg,
+    #fbfbc7 24.25%,
+    rgba(241, 157, 82, 0.6) 100%
+  );
+  box-shadow: 0 vw(4px) vw(4px) 0 rgba(241, 157, 82, 0.6) inset;
+  backdrop-filter: blur(vw(2px));
+  border-radius: 0 vw(100px) vw(100px) 0;
+
+  z-index: 10000;
+}
+
+.sidebar {
+  transform: translateX(-100%);
+  transition: transform 0.4s ease;
+  width: vw(540px);
+  height: vw(3032px);
+  border-radius: 0 vw(100px) vw(100px) 0;
+  background: linear-gradient(
+      180deg,
+      rgba(12, 15, 41, 0.4) 0%,
+      rgba(241, 157, 82, 0.24) 100%
+    ),
+    #282c48;
+  box-shadow: vw(10px) 0 vw(50px) 0 rgba(241, 157, 82, 0.2);
+
+  &.open {
+    transform: translateX(0);
+  }
+}
+
+.historyHeader {
+  display: flex;
+  justify-content: space-between;
+  padding-top: vw(200px);
+
+  .titleBox {
+    display: inline-flex;
+    padding: vw(11px) vw(24px) vw(11px) vw(105px);
+    justify-content: flex-end;
+    align-items: center;
+    border-radius: 0 vw(120px) vw(120px) 0;
+    background: linear-gradient(
+        94deg,
+        rgba(241, 157, 82, 0) -0.61%,
+        rgba(241, 157, 82, 0.6) 111.17%
+      ),
+      rgba(241, 157, 82, 0.4);
+  }
+
+  .HeaderTitle {
+    color: #fdfdfd;
+
+    /* big */
+    font-family: Pretendard;
+    font-size: vw(28px);
+    font-style: normal;
+    font-weight: 600;
+    line-height: 120%; /* 33.6px */
+    letter-spacing: -0.7px;
+  }
+
+  .HeaderSubtitle {
+    display: flex;
+    align-items: center;
+    margin-right: vw(22px);
+    gap: vw(5px);
+
+    .subText {
+      color: #d9d9d9;
+
+      /* basic */
+      font-family: Pretendard;
+      font-size: vw(28px);
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%; /* 33.6px */
+      letter-spacing: -0.7px;
+    }
+
+    .historyImg {
+      width: vw(27px);
+      height: vw(27px);
+    }
+  }
+}
+
+.backButton {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: vw(107px);
+  height: vw(68px);
+  padding-left: vw(18px);
+  flex-shrink: 0;
+  background: linear-gradient(
+    270deg,
+    #fbfbc7 24.25%,
+    rgba(241, 157, 82, 0.6) 100%
+  );
+  box-shadow: 0 vw(4px) vw(4px) 0 rgba(241, 157, 82, 0.6) inset;
+  backdrop-filter: blur(vw(2px));
+  border-radius: vw(100px) 0 0 vw(100px);
+}
