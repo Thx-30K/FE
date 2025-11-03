@@ -27,15 +27,21 @@ export const CardDetail = ({ data, onClick }: CardProps) => {
             <div className={styles.barSection}>
               <div className={styles.barTitle}>{'나이대별 평균 소득'}</div>
               <div className={styles.barContent}>
-                {/* 차트 들어갈 곳 */}
-                <LineAreaChart />
+                <div className={styles.cardText}>
+                  <p className={styles.cardTextTitle}>
+                    패널이 검새된 이유는 다음과 같아요!
+                  </p>
+                  <p className={styles.cardTextCaption}>
+                    ㅁㄴㅇㅁㄴㅇㄴㅇㄴㅇㅁㅁㅁㄴㅁㄴㅇㅁㅇㅇㅇㅁㄴㅇㅁㄴㅇㅇㅁㅇㅇㅁㄴㅇㅁㅇㄴㅇㅁㅇㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁㅁ
+                  </p>
+                </div>
               </div>
             </div>
             <div className={styles.barSection}>
               <div className={styles.barTitle}>{'바 차트 이름'}</div>
               <div className={styles.barContent}>
                 {/* 차트 들어갈 곳 */}
-                <BarChart />
+                <LineAreaChart />
               </div>
             </div>
           </div>
