@@ -1,0 +1,63 @@
+.explainBoxContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.left {
+  flex-direction: row; // 이미지 왼쪽, 텍스트 오른쪽
+}
+
+.right {
+  flex-direction: row-reverse; // 이미지 오른쪽, 텍스트 왼쪽
+}
+
+.explainImg {
+  flex-shrink: 0;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  z-index: 1;
+  transform: translateY(0);
+}
+
+.explainTextContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: $color-white;
+  z-index: 2;
+  gap: vw(30px);
+  max-width: 100%;
+  transform: translateY(0);
+
+  &.alignLeft {
+    text-align: left;
+    align-items: flex-start;
+    margin-left: vw(80px);
+  }
+
+  &.alignRight {
+    text-align: right;
+    align-items: flex-end;
+    padding-right: vw(80px);
+  }
+
+  .mainText {
+    font-size: vw(68px);
+    font-weight: 600;
+    line-height: 120%;
+    white-space: pre;
+    letter-spacing: vw(-1.7px);
+  }
+
+  .subText {
+    font-size: vw(40px);
+    font-weight: 400;
+    line-height: 120%;
+    white-space: pre;
+    letter-spacing: vw(-1px);
+  }
+}
