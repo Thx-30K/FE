@@ -19,7 +19,6 @@
   width: auto;
   max-width: 100%;
   object-fit: contain;
-  z-index: 1;
   transform: translateY(0);
 }
 
@@ -28,7 +27,6 @@
   flex-direction: column;
   justify-content: center;
   color: $color-white;
-  z-index: 2;
   gap: vw(30px);
   max-width: 100%;
   transform: translateY(0);

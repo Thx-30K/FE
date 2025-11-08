@@ -59,7 +59,6 @@ const BanDMoving: React.FC<BanDMovingProps> = ({
         left,
         overflow: 'visible',
         pointerEvents: 'none',
-        zIndex: 9999,
       }}
     >
       <path ref={pathRef} d={pathData} fill="none" />
