@@ -101,7 +101,7 @@ const data: ChartData<'line'> = {
 
         // chartArea가 정의되지 않았으면(초기화 전) 아무것도 반환하지 않습니다.
         if (!chartArea) {
-          return null;
+          return undefined;
         }
 
         // 원본 코드의 createLinearGradient(0, 0, 0, 300)을

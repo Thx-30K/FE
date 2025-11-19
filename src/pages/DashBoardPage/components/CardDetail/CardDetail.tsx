@@ -1,12 +1,16 @@
 import type { CardProps } from '@/types/Card';
-import { BarChart } from '../charts/BarChart';
 import { DoughnutChart } from '../charts/DoughnutChart';
 import { LineAreaChart } from '../charts/LineAreaChart';
 import styles from './CardDetail.module.scss';
 import { cardCloseIcon } from '@/assets';
 import { ExportSelect } from '../ExportSelect/ExportSelect';
+import { useEffect } from 'react';
 
 export const CardDetail = ({ data, onClick }: CardProps) => {
+  useEffect(() => {
+    console.log(data);
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.closeButton} onClick={onClick}>

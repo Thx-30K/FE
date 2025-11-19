@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import s from './SideBar.module.scss';
 
 import OPEN from '@/assets/history-icon.svg';
@@ -9,14 +9,18 @@ const SideBar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [historyList, setHistoryList] = useState<
     { title: string; keywords: string[] }[]
-  >([
-    { title: '서울 사는 20대 남성', keywords: ['서울', '20대', '남성'] },
-    {
-      title: '넷플릭스를 자주 보는 30대 여성',
-      keywords: ['넷플릭스', '30대', '여성', 'OTT'],
-    },
-    { title: 'BMW를 타는 남성', keywords: ['남성', 'BMW', '면허'] },
-  ]);
+  >([]);
+
+  useEffect(() => {
+    setHistoryList([
+      { title: '서울 사는 20대 남성', keywords: ['서울', '20대', '남성'] },
+      {
+        title: '넷플릭스를 자주 보는 30대 여성',
+        keywords: ['넷플릭스', '30대', '여성', 'OTT'],
+      },
+      { title: 'BMW를 타는 남성', keywords: ['남성', 'BMW', '면허'] },
+    ]);
+  }, []);
 
   return (
     <>

@@ -1,4 +1,3 @@
-import React from 'react';
 import s from '../styles/Footer.module.scss';
 
 import LOGO from '@/assets/logo.svg';

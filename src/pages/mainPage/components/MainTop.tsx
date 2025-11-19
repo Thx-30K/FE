@@ -1,4 +1,3 @@
-import React from 'react';
 import s from '../styles/MainTop.module.scss';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 

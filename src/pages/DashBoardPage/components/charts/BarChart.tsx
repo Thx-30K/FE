@@ -79,12 +79,12 @@ const data = {
       label: 'Dataset 1',
       data: labels.map(() => Math.random() * 1000),
       borderColor: 'rgba(241, 157, 82, 0.30)',
-      backgroundColor: (context: ScriptableContext<'line'>) => {
+      backgroundColor: (context: ScriptableContext<'bar'>) => {
         const chart = context.chart;
         const { ctx, chartArea } = chart;
 
         if (!chartArea) {
-          return null;
+          return undefined;
         }
 
         const gradient = ctx.createLinearGradient(
@@ -97,7 +97,7 @@ const data = {
         gradient.addColorStop(0, 'rgba(241, 157, 82, 0.16)');
         gradient.addColorStop(1, 'rgba(237, 112, 45, 0.80)');
 
-        return gradient;
+        return gradient || undefined;
       },
     },
   ],

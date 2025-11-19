@@ -1,5 +1,11 @@
-import { useState } from 'react';
-import Select from 'react-select';
+import { useEffect, useState } from 'react';
+import Select, { type SingleValue, type StylesConfig } from 'react-select';
+import { type CSSObjectWithLabel } from 'react-select';
+
+interface OptionType {
+  label: string;
+  value: string;
+}
 
 const exportOptions = [
   { value: 'csv', label: '.csv' },
@@ -7,8 +13,8 @@ const exportOptions = [
   { value: 'xlsx', label: '.xlsx' },
 ];
 
-const customStyles = {
-  control: (base, state) => ({
+const customStyles: StylesConfig<OptionType, false> = {
+  control: (base: CSSObjectWithLabel) => ({
     // 맨위 컨트롤러 스타일
     ...base,
     borderRadius: '32px 0 0 0',
@@ -28,7 +34,7 @@ const customStyles = {
     zIndex: 2,
     boxShadow: 'none',
   }),
-  singleValue: (base) => ({
+  singleValue: (base: CSSObjectWithLabel) => ({
     // 맨위(선택된) 옵션의 스타일일
     ...base,
     color: 'white',
@@ -36,7 +42,7 @@ const customStyles = {
     fontWeight: '500',
     textAlign: 'center',
   }),
-  menu: (base) => ({
+  menu: (base: CSSObjectWithLabel) => ({
     // 옵션 컨테이너의 스타일
     ...base,
     borderRadius: '0 0 32px 32px',
@@ -45,7 +51,7 @@ const customStyles = {
     transition: 'all 0.3s ease',
     transform: 'translateY(-10px)',
   }),
-  option: (base) => ({
+  option: (base: CSSObjectWithLabel) => ({
     // 옵션 하나하나의 스타일
     ...base,
     backgroundColor: '#593D36',
@@ -60,21 +66,28 @@ const customStyles = {
       cursor: 'pointer',
     },
   }),
-  dropdownIndicator: (base) => ({
+  dropdownIndicator: (base: CSSObjectWithLabel) => ({
     // 드롭다운 화살표 스타일
     ...base,
-    position: 'absolute',
+    position: 'absolute' as const,
     right: 'calc(5px / 1920px * 100vw)',
     color: '#F19D52',
   }),
 };
 
 export const ExportSelect = () => {
-  const [selectedExportOption, setSelectedExportOption] = useState({});
+  const [selectedExportOption, setSelectedExportOption] = useState<
+    SingleValue<OptionType>
+  >(exportOptions[0]);
 
-  const handleExportChange = (option) => {
+  const handleExportChange = (option: SingleValue<OptionType>) => {
     setSelectedExportOption(option);
   };
+
+  useEffect(() => {
+    console.log(selectedExportOption);
+  }, []);
+
   return (
     <Select
       defaultValue={exportOptions[0]}

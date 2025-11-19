@@ -1,4 +1,3 @@
-import React from 'react';
 import s from '../styles/ExplainBox.module.scss';
 import ScrollMotion from './ScrollMotion';
 

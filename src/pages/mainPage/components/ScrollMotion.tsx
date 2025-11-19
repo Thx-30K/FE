@@ -1,5 +1,4 @@
 import { motion, useAnimation } from 'framer-motion';
-import React from 'react';
 
 interface ScrollMotionProps {
   children: React.ReactNode;
