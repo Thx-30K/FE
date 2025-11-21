@@ -7,7 +7,7 @@ interface ExplainBoxProps {
   isImgLeft: boolean;
   imgSrc: string;
   marginTop?: number;
-  height: number;
+  height: string | number;
   imgTop?: number;
   textTop?: number;
   imgWidth?: number;
