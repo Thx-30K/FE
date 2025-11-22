@@ -10,9 +10,11 @@ import { CardDetail } from './components/CardDetail/CardDetail';
 import type { SearchData } from '@/types/Card';
 import { ExportSelect } from './components/ExportSelect/ExportSelect';
 import SideBar from '@/components/SideBar/SideBar';
+import { PanelModal } from './components/PanelModal/PanelModal';
 
 export const DashBoardPage = () => {
   const [cardDetailVisible, setCardDetailVisible] = useState(false);
+  const [PanelModalNumber, setPanelModalNumber] = useState<number | null>(null);
 
   const handleSearch = (query: string) => {
     console.log('Search query:', query);
@@ -120,9 +122,30 @@ export const DashBoardPage = () => {
             <tbody>
               {/* 추후 변경 */}
               {[...Array(10)].map((_, index) => (
-                <tr key={index}>
+                <tr
+                  key={index}
+                  onClick={() => setPanelModalNumber(index)}
+                  onMouseLeave={() => setPanelModalNumber(null)}
+                >
                   <td>{index + 1}</td>
-                  <td>w100010279508856</td>
+                  <td>
+                    w100010279508856
+                    {PanelModalNumber === index && (
+                      <PanelModal
+                        panelId={index}
+                        id="w100010279508856"
+                        tags={[
+                          'test',
+                          '25',
+                          '300만원',
+                          '300만원',
+                          '300만원',
+                          '300만원',
+                        ]}
+                        onMouseLeave={() => setPanelModalNumber(null)}
+                      />
+                    )}
+                  </td>
                   <td>25</td>
                   <td>300만원</td>
                   <td>서울</td>
