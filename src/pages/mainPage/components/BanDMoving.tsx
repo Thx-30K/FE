@@ -1,7 +1,9 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
-
 import { useEffect, useRef, useState } from 'react';
+
 import BAND from '@/assets/main/BanD.svg';
+
+import { vw } from '@/utils/units';
 
 interface BanDMovingProps {
   pathData: string;
@@ -49,12 +51,14 @@ const BanDMoving: React.FC<BanDMovingProps> = ({
   return (
     <svg
       viewBox="0 0 1451 6297"
-      width="1451"
-      height="6297"
+      width="100%"
+      height="100%"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       style={{
         position: 'absolute',
+        width: vw(1451),
+        height: vw(6297),
         top,
         left,
         overflow: 'visible',
@@ -66,8 +70,8 @@ const BanDMoving: React.FC<BanDMovingProps> = ({
       {isReady && (
         <motion.image
           href={BAND}
-          width={`${(231 / 1920) * 100}vw`}
-          height={`${(157 / 1920) * 100}vw`}
+          width={231}
+          height={157}
           style={{
             translateX: x,
             translateY: y,
