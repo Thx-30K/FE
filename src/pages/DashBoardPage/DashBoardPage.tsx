@@ -5,19 +5,45 @@ import { Card } from './components/Card/Card';
 import { DoughnutChart } from './components/charts/DoughnutChart';
 import { LineAreaChart } from './components/charts/LineAreaChart';
 import { BarChart } from './components/charts/BarChart';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { CardDetail } from './components/CardDetail/CardDetail';
 import type { SearchData } from '@/types/Card';
 import { ExportSelect } from './components/ExportSelect/ExportSelect';
 import { PanelTable } from './components/Table/PanelTable';
 import { panelTableData } from '@/data/dashboardData';
+import { api } from '@/apis/instance';
+import type { SurveyResponse, SurveyResultData } from '@/types/Dashboard';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 export const DashBoardPage = () => {
+  const [dashboardData, setDashboardData] = useState<SurveyResultData | null>(
+    null,
+  );
   const [cardDetailVisible, setCardDetailVisible] = useState(false);
+  const nav = useNavigate();
+  const [searchParams] = useSearchParams();
 
-  const handleSearch = (query: string) => {
-    console.log('Search query:', query);
-  };
+  useEffect(() => {
+    const query = searchParams.get('query');
+    const getData = async () => {
+      try {
+        if (!query) return;
+        console.log(query);
+
+        const res = await api.get<SurveyResponse>(`/api/querys?query=${query}`);
+        if (res.data.httpStatus === 200) {
+          setDashboardData(res.data.data);
+        } else {
+          throw new Error('Failed to fetch data');
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+        alert('데이터를 불러오는 데 실패했습니다.');
+        nav('/', { replace: true });
+      }
+    };
+    getData();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -31,7 +57,7 @@ export const DashBoardPage = () => {
       {/* 검색 및 카드 영역 */}
       <div className={styles.topContent}>
         <img src={logo} className={styles.logo} alt="Logo" />
-        <SearchBar onSearchSubmit={handleSearch} />
+        <SearchBar />
         <div className={styles.searchSummary}>
           <div className={styles.SummaryTags}>
             {tags.map((tag, index) => (
