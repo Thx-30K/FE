@@ -1,9 +1,10 @@
 import { Outlet } from 'react-router-dom';
+import SideBar from './SideBar/SideBar';
 
 export const Layout = () => {
   return (
     <>
-      {/* 추후에 이전 검색 기록 보기 추가 */}
+      <SideBar />
       <Outlet />
     </>
   );
