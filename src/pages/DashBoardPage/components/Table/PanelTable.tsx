@@ -4,12 +4,12 @@ import styles from './PanelTable.module.scss';
 
 interface PanelDetail {
   id: number;
-  mbsn: string;
-  gender: string;
-  ageBand: string;
-  maritalStatus: string;
-  jobField: string;
-  carOwnership: string;
+  mbSn: string;
+  gender: string | null;
+  ageBand: string | null;
+  maritalStatus: string | null;
+  jobField: string | null;
+  carOwnership: boolean | null;
 }
 
 interface PanelTableProps {
@@ -44,13 +44,13 @@ export const PanelTable = ({ panelDetails }: PanelTableProps) => {
     <>
       <table>
         <colgroup>
-          <col style={{ width: '50px' }} />
-          <col style={{ width: '10px' }} />
-          <col style={{ width: '150px' }} />
-          <col style={{ width: '150px' }} />
-          <col style={{ width: '150px' }} />
-          <col style={{ width: '150px' }} />
-          <col style={{ width: '150px' }} />
+          <col style={{ width: '5%' }} />
+          <col style={{ width: '15%' }} />
+          <col style={{ width: '5%' }} />
+          <col style={{ width: '10%' }} />
+          <col style={{ width: '15%' }} />
+          <col style={{ width: '30%' }} />
+          <col style={{ width: '10%' }} />
         </colgroup>
         <thead>
           <tr>
@@ -73,11 +73,11 @@ export const PanelTable = ({ panelDetails }: PanelTableProps) => {
             >
               <td>{startIndex + index + 1}</td>
               <td>
-                {panel.mbsn || '-'}
+                {panel.mbSn || '-'}
                 {panelModalNumber === panel.id && (
                   <PanelModal
                     panelId={panel.id}
-                    id={panel.mbsn}
+                    id={panel.mbSn}
                     tags={[
                       'test',
                       '25',
@@ -94,7 +94,13 @@ export const PanelTable = ({ panelDetails }: PanelTableProps) => {
               <td>{panel.ageBand || '-'}</td>
               <td>{panel.maritalStatus || '-'}</td>
               <td>{panel.jobField || '-'}</td>
-              <td>{panel.carOwnership || '-'}</td>
+              <td>
+                {panel.carOwnership === true
+                  ? '소유'
+                  : panel.carOwnership === false
+                  ? '없음'
+                  : '-'}
+              </td>
             </tr>
           ))}
         </tbody>

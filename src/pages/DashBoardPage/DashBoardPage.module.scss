@@ -188,7 +188,7 @@
 
   /* 표 영역 */
   .bottomContent {
-    @include flex(column, $justify-content: flex-end, $gap: vw(38px));
+    @include flex(column, $justify-content: flex-start, $gap: vw(38px));
     position: relative;
     width: 92%;
     height: vw(1000px);
@@ -198,6 +198,7 @@
       rgba(12, 15, 41, 0.45) 0%,
       rgba(241, 157, 82, 0.27) 100%
     );
+    padding-top: vw(114px);
     padding-bottom: vw(46px);
     .bottomTitle {
       @include flex($justify-content: flex-start);
