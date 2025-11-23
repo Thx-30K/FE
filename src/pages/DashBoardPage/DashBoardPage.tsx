@@ -21,9 +21,9 @@ export const DashBoardPage = () => {
   const [cardDetailVisible, setCardDetailVisible] = useState(false);
   const nav = useNavigate();
   const [searchParams] = useSearchParams();
+  const query = searchParams.get('query');
 
   useEffect(() => {
-    const query = searchParams.get('query');
     const getData = async () => {
       try {
         if (!query) return;
@@ -45,6 +45,10 @@ export const DashBoardPage = () => {
     getData();
   }, []);
 
+  useEffect(() => {
+    console.log(dashboardData);
+  }, [dashboardData]);
+
   return (
     <div className={styles.container}>
       {/* 카드 클릭 시 */}
@@ -57,7 +61,7 @@ export const DashBoardPage = () => {
       {/* 검색 및 카드 영역 */}
       <div className={styles.topContent}>
         <img src={logo} className={styles.logo} alt="Logo" />
-        <SearchBar />
+        <SearchBar placeholder={query!} />
         <div className={styles.searchSummary}>
           <div className={styles.SummaryTags}>
             {tags.map((tag, index) => (
@@ -66,17 +70,19 @@ export const DashBoardPage = () => {
               </span>
             ))}
           </div>
-          <div className={styles.resultCount}>검색된 패널 : {100}명</div>
+          <div className={styles.resultCount}>
+            검색된 패널 : {dashboardData?.panelDetails.length}명
+          </div>
         </div>
         <div className={styles.recommandPanel}>
           <div className={styles.recommandPanelTitle}>
             이런 패널들은 어때요?
           </div>
           <div className={styles.cardList}>
-            {cards.map((card) => (
+            {dashboardData?.scenarios.map((data, i) => (
               <Card
-                key={card.id}
-                data={card}
+                key={i}
+                data={data}
                 onClick={() => setCardDetailVisible(true)}
               />
             ))}

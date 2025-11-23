@@ -3,7 +3,7 @@ import styles from './SearchBar.module.scss';
 import { searchIcon } from '@/assets';
 import { useNavigate } from 'react-router-dom';
 
-export const SearchBar = () => {
+export const SearchBar = ({ placeholder }: { placeholder?: string }) => {
   const [query, setQuery] = useState('');
   const nav = useNavigate();
 
@@ -22,7 +22,7 @@ export const SearchBar = () => {
       <input
         className={styles.input}
         type="search"
-        placeholder="search..."
+        placeholder={placeholder || 'search...'}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
