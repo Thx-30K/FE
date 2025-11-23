@@ -6,6 +6,7 @@ import { cardCloseIcon } from '@/assets';
 import { ExportSelect } from '../ExportSelect/ExportSelect';
 import { useEffect } from 'react';
 import { PanelTable } from '../Table/PanelTable';
+import { panelTableData } from '@/data/dashboardData';
 
 export const CardDetail = ({ data, onClick }: CardProps) => {
   useEffect(() => {
@@ -63,7 +64,7 @@ export const CardDetail = ({ data, onClick }: CardProps) => {
               <div className={styles.exportButton}>내보내기</div>
             </div>
           </div>
-          <PanelTable />
+          <PanelTable panelDetails={panelTableData} />
         </div>
       </div>
     </div>

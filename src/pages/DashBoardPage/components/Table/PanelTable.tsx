@@ -1,20 +1,7 @@
 import { useEffect, useState } from 'react';
 import { PanelModal } from '../PanelModal/PanelModal';
 import styles from './PanelTable.module.scss';
-
-interface PanelDetail {
-  id: number;
-  mbSn: string;
-  gender: string | null;
-  ageBand: string | null;
-  maritalStatus: string | null;
-  jobField: string | null;
-  carOwnership: boolean | null;
-}
-
-interface PanelTableProps {
-  panelDetails: PanelDetail[];
-}
+import type { PanelDetail, PanelTableProps } from '@/types/Table';
 
 const ITEMS_PER_PAGE = 10;
 
