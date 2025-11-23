@@ -14,7 +14,7 @@ export const PanelModal = ({
   onMouseLeave,
 }: PanelModalProps) => {
   return (
-    <div className={styles.container} onMouseLeave={onMouseLeave}>
+    <div key={panelId} className={styles.container} onMouseLeave={onMouseLeave}>
       <div className={styles.id}>{id}</div>
       <div className={styles.content}>
         {tags.map((tag, i) => (
