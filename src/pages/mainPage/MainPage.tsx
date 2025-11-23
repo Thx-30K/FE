@@ -5,7 +5,6 @@ import ExplainBox from './components/ExplainBox';
 import Footer from './components/Footer';
 import ScrollMotion from './components/ScrollMotion';
 import BanDMoving from './components/BanDMoving';
-import SideBar from '@/components/SideBar/SideBar';
 
 import RESEARCH from '../../assets/main/main-research.svg';
 import DASHBOARD from '../../assets/main/main-dashboard.svg';
