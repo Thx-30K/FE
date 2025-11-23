@@ -1,9 +1,45 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { PanelModal } from '../PanelModal/PanelModal';
 import styles from './PanelTable.module.scss';
 
-export const PanelTable = () => {
-  const [PanelModalNumber, setPanelModalNumber] = useState<number | null>(null);
+interface PanelDetail {
+  id: number;
+  mbsn: string;
+  gender: string;
+  ageBand: string;
+  maritalStatus: string;
+  jobField: string;
+  carOwnership: string;
+}
+
+interface PanelTableProps {
+  panelDetails: PanelDetail[];
+}
+
+const ITEMS_PER_PAGE = 10;
+
+export const PanelTable = ({ panelDetails }: PanelTableProps) => {
+  const [panelData, setPanelData] = useState<PanelDetail[]>(panelDetails);
+  const [panelModalNumber, setPanelModalNumber] = useState<number | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+
+  useEffect(() => {
+    setPanelData(panelDetails);
+    setCurrentPage(1);
+  }, [panelDetails]);
+
+  const totalPages = Math.ceil(panelData.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+
+  // 현재 페이지에 보여줄 데이터
+  const currentData = panelData.slice(startIndex, endIndex);
+
+  // 페이지 변경 핸들러
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <>
       <table>
@@ -20,28 +56,28 @@ export const PanelTable = () => {
           <tr>
             <th>No.</th>
             <th>패널 ID</th>
-            <th>나이</th>
-            <th>월소득</th>
-            <th>지역</th>
-            <th>담배</th>
-            <th>직업</th>
+            <th>성별</th>
+            <th>나이대</th>
+            <th>결혼 여부</th>
+            <th>직업 분야</th>
+            <th>차 소유</th>
           </tr>
         </thead>
+        {/* 패널 데이터 리스트 */}
         <tbody>
-          {/* 추후 변경 */}
-          {[...Array(10)].map((_, index) => (
+          {currentData.map((panel, index) => (
             <tr
-              key={index}
-              onClick={() => setPanelModalNumber(index)}
+              key={panel.id}
+              onClick={() => setPanelModalNumber(panel.id)}
               onMouseLeave={() => setPanelModalNumber(null)}
             >
-              <td>{index + 1}</td>
+              <td>{startIndex + index + 1}</td>
               <td>
-                w100010279508856
-                {PanelModalNumber === index && (
+                {panel.mbsn || '-'}
+                {panelModalNumber === panel.id && (
                   <PanelModal
-                    panelId={index}
-                    id="w100010279508856"
+                    panelId={panel.id}
+                    id={panel.mbsn}
                     tags={[
                       'test',
                       '25',
@@ -54,27 +90,50 @@ export const PanelTable = () => {
                   />
                 )}
               </td>
-              <td>25</td>
-              <td>300만원</td>
-              <td>서울</td>
-              <td>비흡연</td>
-              <td>학생</td>
+              <td>{panel.gender || '-'}</td>
+              <td>{panel.ageBand || '-'}</td>
+              <td>{panel.maritalStatus || '-'}</td>
+              <td>{panel.jobField || '-'}</td>
+              <td>{panel.carOwnership || '-'}</td>
             </tr>
           ))}
         </tbody>
       </table>
+      {/* 페이지네이션 컨트롤 */}
       <div className={styles.tableNav}>
-        <span className={styles.prevButton} onClick={() => {}}>
+        <span
+          className={styles.prevButton}
+          onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+          style={{
+            cursor: currentPage === 1 ? 'not-allowed' : 'pointer',
+            opacity: currentPage === 1 ? 0.5 : 1,
+          }}
+        >
           ◀
         </span>
         <div className={styles.tableNumbers}>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((page) => (
-            <span key={page} className={`${styles.active} ${styles.tableNum}`}>
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <span
+              key={page}
+              className={`${currentPage === page && styles.active} ${
+                styles.tableNum
+              }`}
+              onClick={() => handlePageChange(page)}
+            >
               {page}
             </span>
           ))}
         </div>
-        <span className={styles.nextButton} onClick={() => {}}>
+        <span
+          className={styles.nextButton}
+          onClick={() =>
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+          }
+          style={{
+            cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+            opacity: currentPage === totalPages ? 0.5 : 1,
+          }}
+        >
           ▶
         </span>
       </div>
