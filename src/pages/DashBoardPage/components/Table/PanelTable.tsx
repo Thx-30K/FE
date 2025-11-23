@@ -6,7 +6,9 @@ import type { PanelDetail, PanelTableProps } from '@/types/Table';
 const ITEMS_PER_PAGE = 10;
 
 export const PanelTable = ({ panelDetails }: PanelTableProps) => {
-  const [panelData, setPanelData] = useState<PanelDetail[]>(panelDetails);
+  const [panelData, setPanelData] = useState<PanelDetail[] | undefined | null>(
+    panelDetails,
+  );
   const [panelModalNumber, setPanelModalNumber] = useState<number | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
 
@@ -15,12 +17,12 @@ export const PanelTable = ({ panelDetails }: PanelTableProps) => {
     setCurrentPage(1);
   }, [panelDetails]);
 
-  const totalPages = Math.ceil(panelData.length / ITEMS_PER_PAGE);
+  const totalPages = panelData && Math.ceil(panelData.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
 
   // 현재 페이지에 보여줄 데이터
-  const currentData = panelData.slice(startIndex, endIndex);
+  const currentData = panelData && panelData.slice(startIndex, endIndex);
 
   // 페이지 변경 핸들러
   const handlePageChange = (page: number) => {
@@ -52,7 +54,7 @@ export const PanelTable = ({ panelDetails }: PanelTableProps) => {
         </thead>
         {/* 패널 데이터 리스트 */}
         <tbody>
-          {currentData.map((panel, index) => (
+          {currentData?.map((panel, index) => (
             <tr
               key={panel.id}
               onClick={() => setPanelModalNumber(panel.id)}
@@ -105,7 +107,7 @@ export const PanelTable = ({ panelDetails }: PanelTableProps) => {
           ◀
         </span>
         <div className={styles.tableNumbers}>
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+          {Array.from({ length: totalPages! }, (_, i) => i + 1).map((page) => (
             <span
               key={page}
               className={`${currentPage === page && styles.active} ${
@@ -120,7 +122,7 @@ export const PanelTable = ({ panelDetails }: PanelTableProps) => {
         <span
           className={styles.nextButton}
           onClick={() =>
-            setCurrentPage((prev) => Math.min(prev + 1, totalPages))
+            setCurrentPage((prev) => Math.min(prev + 1, totalPages!))
           }
           style={{
             cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',

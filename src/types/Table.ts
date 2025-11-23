@@ -9,5 +9,5 @@ export interface PanelDetail {
 }
 
 export interface PanelTableProps {
-  panelDetails: PanelDetail[];
+  panelDetails: PanelDetail[] | undefined | null;
 }

@@ -10,7 +10,6 @@ import { CardDetail } from './components/CardDetail/CardDetail';
 import type { SearchData } from '@/types/Card';
 import { ExportSelect } from './components/ExportSelect/ExportSelect';
 import { PanelTable } from './components/Table/PanelTable';
-import { panelTableData } from '@/data/dashboardData';
 import { api } from '@/apis/instance';
 import type { SurveyResponse, SurveyResultData } from '@/types/Dashboard';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -33,6 +32,7 @@ export const DashBoardPage = () => {
         const res = await api.get<SurveyResponse>(`/api/querys?query=${query}`);
         if (res.data.httpStatus === 200) {
           setDashboardData(res.data.data);
+          console.log('getData');
         } else {
           throw new Error('Failed to fetch data');
         }
@@ -120,7 +120,7 @@ export const DashBoardPage = () => {
             <div className={styles.exportButton}>내보내기</div>
           </div>
         </div>
-        <PanelTable panelDetails={panelTableData} />
+        <PanelTable panelDetails={dashboardData?.panelDetails} />
       </div>
     </div>
   );
