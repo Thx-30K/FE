@@ -48,7 +48,7 @@
     @include flex(column, flex-start, $gap: vw(20px));
     width: 100%;
     .qDataContent {
-      @include flex($justify-content: space-between);
+      @include flex($justify-content: space-between, $gap: vw(10px));
       font-size: vw(20px);
       width: 100%;
       padding: vw(10px);
@@ -57,11 +57,13 @@
       .qDataQuestion {
         position: relative;
         padding-left: vw(10px);
+        text-align: start;
       }
       .qDataAnswer {
         padding: vw(5px) vw(10px);
         border-radius: 50px;
         background: rgba(241, 157, 82, 0.4);
+        min-width: vw(150px);
       }
     }
   }
