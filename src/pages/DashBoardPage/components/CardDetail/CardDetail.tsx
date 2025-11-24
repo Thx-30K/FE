@@ -51,6 +51,7 @@ export const CardDetail = ({
 
   return (
     <div className={styles.container}>
+      {loading && <div className={styles.loading}></div>}
       <div className={styles.closeButton} onClick={onClick}>
         <img src={cardCloseIcon} alt="cancel" />
       </div>
