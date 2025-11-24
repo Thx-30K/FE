@@ -4,8 +4,11 @@ import s from './SideBar.module.scss';
 import OPEN from '@/assets/history-icon.svg';
 import BACK from '@/assets/history-back-icon.svg';
 import HISTORY from '@/assets/history.svg';
+import { useNavigate } from 'react-router-dom';
 
 const SideBar = () => {
+  const nav = useNavigate();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [historyList, setHistoryList] = useState<{ title: string }[]>([]);
 
@@ -43,7 +46,14 @@ const SideBar = () => {
 
         <div className={s.historyContainer}>
           {historyList.map((item, idx) => (
-            <div className={s.historyBox} key={idx}>
+            <div
+              className={s.historyBox}
+              key={idx}
+              onClick={() => {
+                nav(`/dashboard?query=${item.title}`);
+                setIsOpen(false);
+              }}
+            >
               <p className={s.historyTitle}>{item.title}</p>
             </div>
           ))}
