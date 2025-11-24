@@ -4,11 +4,24 @@ import { LineAreaChart } from '../charts/LineAreaChart';
 import styles from './CardDetail.module.scss';
 import { cardCloseIcon } from '@/assets';
 import { ExportSelect } from '../ExportSelect/ExportSelect';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { PanelTable } from '../Table/PanelTable';
 import { api } from '@/apis/instance';
 import { CardDetailSkeleton } from './CardDetailSkeleton';
 import { formatReportText } from '@/utils/textFormat';
+import { useQuery } from '@tanstack/react-query';
+
+const fetchScenarioDetail = async (payload: {
+  scenarioText: string;
+  scenarioType: string;
+  originalPanels: number;
+}) => {
+  const { data } = await api.post('/api/scenario', payload);
+  if (data.httpStatus !== 200) {
+    throw new Error('Failed to fetch detail data');
+  }
+  return data.data;
+};
 
 export const CardDetail = ({
   data,
@@ -16,42 +29,34 @@ export const CardDetail = ({
   panelSize,
   originLineChartData,
 }: CardProps) => {
-  const [detailData, setDetailData] = useState<ScenarioDetail | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
+  const {
+    data: detailData,
+    isPending,
+    isError,
+  } = useQuery<ScenarioDetail>({
+    queryKey: ['scenarioDetail', data?.text, data?.type, panelSize],
+    queryFn: () =>
+      fetchScenarioDetail({
+        scenarioText: data!.text, // enabled 체크로 인해 여기서는 data가 확실히 존재
+        scenarioType: data!.type,
+        originalPanels: panelSize || 0,
+      }),
+    enabled: !!data, // data가 존재할 때만 쿼리 실행
+    staleTime: 1000 * 60 * 10, // 10분간 캐시 유지
+  });
 
   // 차트 관련 데이터 매핑
   const stats = detailData?.demographicsStats?.stats;
   const entry = stats ? Object.entries(stats)[0] : null;
 
   useEffect(() => {
-    const getDetailData = async () => {
-      setLoading(true);
-      try {
-        const res = await api.post('/api/scenario', {
-          scenarioText: data?.text,
-          scenarioType: data?.type,
-          originalPanels: panelSize,
-        });
-
-        if (res.status === 200) {
-          setDetailData(res.data.data);
-        } else {
-          throw new Error('Failed to fetch detail data');
-        }
-      } catch (error) {
-        console.error('Error fetching detail data:', error);
-        onClick();
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    if (data) {
-      getDetailData();
+    if (isError) {
+      console.error('Error fetching detail data');
+      onClick(); // 에러 시 모달 닫기
     }
-  }, [data]);
+  }, [isError, onClick]);
 
-  if (loading) {
+  if (isPending) {
     return <CardDetailSkeleton data={data} onClick={onClick} />;
   }
 
