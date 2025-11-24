@@ -12,11 +12,13 @@ import { PanelTable } from './components/Table/PanelTable';
 import { api } from '@/apis/instance';
 import type { SurveyResponse, SurveyResultData } from '@/types/Dashboard';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { DashboardSkeleton } from './components/DashboardSkeleton/DashboardSkeleton';
 
 export const DashBoardPage = () => {
   const [dashboardData, setDashboardData] = useState<SurveyResultData | null>(
     null,
   );
+  const [loading, setLoading] = useState<boolean>(true);
   const [cardDetailVisible, setCardDetailVisible] = useState(false);
   const [cardDetailNumber, setCardDetailNumber] = useState<number | null>(null);
   const nav = useNavigate();
@@ -31,6 +33,7 @@ export const DashBoardPage = () => {
     const getData = async () => {
       try {
         if (!query) return;
+        setLoading(true);
         console.log(query);
 
         const res = await api.get<SurveyResponse>(`/api/querys?query=${query}`);
@@ -44,6 +47,8 @@ export const DashBoardPage = () => {
         console.error('Error fetching data:', error);
         alert('데이터를 불러오는 데 실패했습니다.');
         nav('/', { replace: true });
+      } finally {
+        setLoading(false);
       }
     };
     getData();
@@ -52,6 +57,10 @@ export const DashBoardPage = () => {
   useEffect(() => {
     console.log(dashboardData);
   }, [dashboardData]);
+
+  if (loading) {
+    return <DashboardSkeleton query={query!} />;
+  }
 
   return (
     <div className={styles.container}>
