@@ -5,6 +5,7 @@ import {
   Tooltip,
   Legend,
   type ChartOptions,
+  type ChartData,
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import styles from './DoughnutChart.module.scss';
@@ -17,7 +18,6 @@ const options: ChartOptions<'doughnut'> = {
   cutout: '30%',
   circumference: 360,
   animation: {
-    animateScale: true,
     animateRotate: true,
   },
   plugins: {
@@ -31,41 +31,74 @@ const options: ChartOptions<'doughnut'> = {
   },
 };
 
-const data = {
-  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-      ],
-      // borderColor: 'rgba(255, 255, 255, 1)',
-      borderWidth: 0,
-    },
-  ],
+// 성별용 고정 색상
+const GENDER_COLORS: Record<string, string> = {
+  F: 'rgba(255, 99, 132, 1)',
+  M: 'rgba(54, 162, 235, 1)',
 };
 
-export const DoughnutChart = () => {
+// 연령대, 지역 등을 위한 랜덤 색상
+const PALETTE_COLORS = [
+  '#FF6384',
+  '#36A2EB',
+  '#FFCE56',
+  '#4BC0C0',
+  '#9966FF',
+  '#FF9F40',
+  '#C9CBCF',
+  '#FFCD56',
+  '#4D5360',
+  '#E7E9ED',
+  '#71B37C',
+  '#E6A57E',
+];
+
+interface DoughnutChartProps {
+  // 백엔드 데이터 구조 중 하나를 받음
+  dataMap?: Record<string, number>;
+  // 현재 어떤 카테고리를 그리고 있는지 (색상 결정을 위해 필요)
+  category: '성별' | '연령대' | '지역' | '학력';
+}
+
+export const DoughnutChart = ({ dataMap, category }: DoughnutChartProps) => {
+  if (!dataMap || Object.keys(dataMap).length === 0) {
+    return <div className={styles.emptyState}>데이터가 없습니다.</div>;
+  }
+
+  const labels = Object.keys(dataMap);
+  const values = Object.values(dataMap);
+
+  const backgroundColors = labels.map((label, index) => {
+    if (category === '성별') {
+      return GENDER_COLORS[label] || '#999999'; // 매칭 안되면 회색
+    }
+    return PALETTE_COLORS[index % PALETTE_COLORS.length];
+  });
+
+  const data: ChartData<'doughnut'> = {
+    labels,
+    datasets: [
+      {
+        data: values,
+        backgroundColor: backgroundColors,
+        borderWidth: 0, // 경계선 없음
+      },
+    ],
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.chartContainer}>
         <Doughnut options={options} data={data} />
+        <span className={styles.centerText}>{category}</span>
       </div>
       <div className={styles.chartLabelContainer}>
-        {data.labels.map((label, index) => (
+        {labels.map((label, index) => (
           <div key={index} className={styles.chartLabel}>
             <div
               className={styles.colorBox}
               style={{
-                backgroundColor: data.datasets[0].backgroundColor[
-                  index
-                ] as string,
+                backgroundColor: backgroundColors[index],
               }}
             ></div>
             <div className={styles.labelText}>{label}</div>

@@ -28,6 +28,14 @@
     padding: vw(20px);
     box-shadow: 4px 4px 4px 0 rgba(255, 255, 255, 0.25) inset;
 
+    .centerText {
+      position: absolute;
+      color: $color-white;
+      font-size: vw(30px);
+      font-weight: 500;
+      line-height: 120%;
+      letter-spacing: -0.6px;
+    }
     &::after {
       content: '';
       position: absolute;

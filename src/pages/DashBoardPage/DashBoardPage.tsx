@@ -23,6 +23,9 @@ export const DashBoardPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
 
+  const stats = dashboardData?.demographicsStats?.stats;
+  const entry = stats ? Object.entries(stats)[0] : null;
+
   useEffect(() => {
     const getData = async () => {
       try {
@@ -95,7 +98,14 @@ export const DashBoardPage = () => {
           <div className={styles.doughnutTitle}>{'검색 결과'}</div>
           <div className={styles.doughnutSection}>
             {/* 차트 들어갈 곳 */}
-            <DoughnutChart />
+            {entry ? (
+              <DoughnutChart
+                dataMap={entry[1]}
+                category={entry[0] as '성별' | '연령대' | '지역' | '학력'}
+              />
+            ) : (
+              <p>데이터가 없습니다.</p>
+            )}
           </div>
         </div>
         <div className={styles.barContainer}>
