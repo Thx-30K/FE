@@ -7,18 +7,20 @@ import { LineAreaChart } from './components/charts/LineAreaChart';
 import { BarChart } from './components/charts/BarChart';
 import { useEffect, useState } from 'react';
 import { CardDetail } from './components/CardDetail/CardDetail';
-import type { SearchData } from '@/types/Card';
 import { ExportSelect } from './components/ExportSelect/ExportSelect';
 import { PanelTable } from './components/Table/PanelTable';
 import { api } from '@/apis/instance';
 import type { SurveyResponse, SurveyResultData } from '@/types/Dashboard';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { DashboardSkeleton } from './components/DashboardSkeleton/DashboardSkeleton';
 
 export const DashBoardPage = () => {
   const [dashboardData, setDashboardData] = useState<SurveyResultData | null>(
     null,
   );
+  const [loading, setLoading] = useState<boolean>(true);
   const [cardDetailVisible, setCardDetailVisible] = useState(false);
+  const [cardDetailNumber, setCardDetailNumber] = useState<number | null>(null);
   const nav = useNavigate();
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
@@ -31,6 +33,7 @@ export const DashBoardPage = () => {
     const getData = async () => {
       try {
         if (!query) return;
+        setLoading(true);
         console.log(query);
 
         const res = await api.get<SurveyResponse>(`/api/querys?query=${query}`);
@@ -44,6 +47,8 @@ export const DashBoardPage = () => {
         console.error('Error fetching data:', error);
         alert('데이터를 불러오는 데 실패했습니다.');
         nav('/', { replace: true });
+      } finally {
+        setLoading(false);
       }
     };
     getData();
@@ -53,13 +58,22 @@ export const DashBoardPage = () => {
     console.log(dashboardData);
   }, [dashboardData]);
 
+  if (loading) {
+    return <DashboardSkeleton query={query!} />;
+  }
+
   return (
     <div className={styles.container}>
       {/* 카드 클릭 시 */}
-      {cardDetailVisible && (
+      {cardDetailVisible && cardDetailNumber !== null && (
         <CardDetail
-          data={cards[0]}
-          onClick={() => setCardDetailVisible(false)}
+          data={dashboardData?.scenarios[cardDetailNumber]}
+          onClick={() => {
+            setCardDetailVisible(false);
+            setCardDetailNumber(null);
+          }}
+          panelSize={dashboardData?.panelDetails.length}
+          originLineChartData={dashboardData?.monthlyIncomeStats.incomeRatios}
         />
       )}
       {/* 검색 및 카드 영역 */}
@@ -87,13 +101,16 @@ export const DashBoardPage = () => {
               <Card
                 key={i}
                 data={data}
-                onClick={() => setCardDetailVisible(true)}
+                onClick={() => {
+                  setCardDetailVisible(true);
+                  setCardDetailNumber(i);
+                }}
               />
             ))}
           </div>
         </div>
       </div>
-      {/* TODO: 그래프 영역 */}
+      {/* 그래프 영역 */}
       <div className={styles.middleContent}>
         <div className={styles.doughnutContainer}>
           <div className={styles.doughnutTitle}>인구 통계 분포</div>
@@ -146,41 +163,3 @@ export const DashBoardPage = () => {
     </div>
   );
 };
-
-const cards: SearchData[] = [
-  {
-    id: 1,
-    tags: ['여자', '남자', '20대', '30대'],
-    query: '넷플릭스를 자주보는 서울 20대 남성',
-    count: 120,
-    img: '',
-  },
-  {
-    id: 1,
-    tags: ['여자', '남자', '20대', '30대'],
-    query: '넷플릭스를 자주보는 서울 20대 남성',
-    count: 120,
-    img: '',
-  },
-  {
-    id: 1,
-    tags: ['여자', '남자', '20대', '30대'],
-    query: '넷플릭스를 자주보는 서울 20대 남성',
-    count: 120,
-    img: '',
-  },
-  {
-    id: 1,
-    tags: ['여자', '남자', '20대', '30대'],
-    query: '넷플릭스를 자주보는 서울 20대 남성',
-    count: 120,
-    img: '',
-  },
-  {
-    id: 1,
-    tags: ['여자', '남자', '20대', '30대'],
-    query: '넷플릭스를 자주보는 서울 20대 남성',
-    count: 120,
-    img: '',
-  },
-];

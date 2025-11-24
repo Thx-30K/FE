@@ -15,4 +15,5 @@ export interface DoughnutChartProps {
 
 export interface LineAreaChartProps {
   dataMap?: Record<string, number>;
+  dataMap2?: Record<string, number>;
 }

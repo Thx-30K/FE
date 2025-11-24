@@ -12,7 +12,8 @@
   position: absolute;
   left: vw(300px);
   bottom: 50%;
-  width: vw(405px);
+  width: vw(605px);
+  min-height: vw(100px);
   z-index: 1;
   padding: vw(35px) vw(25px) vw(60px) vw(25px);
 
@@ -22,6 +23,7 @@
   font-weight: 500;
   line-height: 120%;
   letter-spacing: -0vw (7px);
+  transition: all 0.3s ease;
   &::after {
     content: '';
     position: absolute;
@@ -38,19 +40,30 @@
   }
 
   .summary {
+    font-size: vw(24px);
+    text-align: start;
   }
 
   .content {
-    @include flex(column, $gap: vw(10px));
+    @include flex(column, flex-start, $gap: vw(20px));
+    width: 100%;
     .qDataContent {
-      @include flex(column, $gap: vw(5px));
+      @include flex($justify-content: space-between, $gap: vw(10px));
       font-size: vw(20px);
+      width: 100%;
+      padding: vw(10px);
+      border-radius: 50px;
+      background: rgba(241, 157, 82, 0.4);
       .qDataQuestion {
+        position: relative;
+        padding-left: vw(10px);
+        text-align: start;
       }
       .qDataAnswer {
-        padding: vw(10px);
+        padding: vw(5px) vw(10px);
         border-radius: 50px;
         background: rgba(241, 157, 82, 0.4);
+        min-width: vw(150px);
       }
     }
   }

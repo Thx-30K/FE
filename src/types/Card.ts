@@ -1,14 +1,22 @@
-// 검색 결과 데이터 타입
-export interface SearchData {
-  id: number;
-  tags: string[];
-  query: string;
-  count: number;
-  img: string;
-}
+import type {
+  DemographicsStats,
+  MonthlyIncomeStats,
+  Scenario,
+} from './Dashboard';
+import type { PanelDetail } from './Table';
 
 //Card 컴포넌트 props 타입
 export interface CardProps {
-  data: SearchData;
+  data?: Scenario;
   onClick: () => void;
+  panelSize?: number;
+  originLineChartData?: Record<string, number>;
+}
+
+// 시나리오 상세 데이터 객체
+export interface ScenarioDetail {
+  demographicsStats: DemographicsStats;
+  monthlyIncomeStats: MonthlyIncomeStats;
+  report: string;
+  panelDetails: PanelDetail[];
 }
