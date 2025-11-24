@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { PanelTable } from '../Table/PanelTable';
 import { api } from '@/apis/instance';
 import { CardDetailSkeleton } from './CardDetailSkeleton';
+import { formatReportText } from '@/utils/textFormat';
 
 export const CardDetail = ({
   data,
@@ -88,7 +89,7 @@ export const CardDetail = ({
                     className={styles.cardTextCaption}
                     style={{ whiteSpace: 'pre-wrap' }}
                   >
-                    {detailData?.report}
+                    {formatReportText(detailData?.report)}
                   </p>
                 </div>
               </div>
