@@ -8,6 +8,7 @@ import {
   Legend,
   type ScriptableContext,
   type ChartOptions,
+  type ChartData,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import styles from './BarChart.module.scss';
@@ -37,6 +38,13 @@ const options: ChartOptions<'bar'> = {
     title: {
       display: false,
     },
+    tooltip: {
+      backgroundColor: 'rgba(0,0,0,0.8)',
+      padding: 10,
+      callbacks: {
+        label: (context) => ` ${context.raw}명`,
+      },
+    },
   },
   scales: {
     x: {
@@ -60,53 +68,73 @@ const options: ChartOptions<'bar'> = {
       },
       ticks: {
         color: '#ffffff',
-        align: 'end',
+        align: 'center',
         font: {
           weight: 'bold',
           lineHeight: 1.2,
         },
+        autoSkip: false,
       },
     },
   },
 };
 
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+interface QuestionStat {
+  questionId: number;
+  questionText: string;
+  answers: Record<string, number>;
+}
 
-const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Dataset 1',
-      data: labels.map(() => Math.random() * 1000),
-      borderColor: 'rgba(241, 157, 82, 0.30)',
-      backgroundColor: (context: ScriptableContext<'bar'>) => {
-        const chart = context.chart;
-        const { ctx, chartArea } = chart;
+interface BarChartProps {
+  dataMap?: QuestionStat[];
+}
 
-        if (!chartArea) {
-          return undefined;
-        }
+export const BarChart = ({ dataMap }: BarChartProps) => {
+  if (!dataMap || Object.keys(dataMap).length === 0) {
+    return <div className={styles.emptyState}>데이터가 없습니다.</div>;
+  }
 
-        const gradient = ctx.createLinearGradient(
-          chartArea.left,
-          0,
-          chartArea.right,
-          0,
-        );
+  const labels = Object.keys(dataMap[0].answers);
+  const values = Object.values(dataMap[0].answers);
 
-        gradient.addColorStop(0, 'rgba(241, 157, 82, 0.16)');
-        gradient.addColorStop(1, 'rgba(237, 112, 45, 0.80)');
+  const data: ChartData<'bar'> = {
+    labels,
+    datasets: [
+      {
+        label: '응답 수',
+        data: values,
+        borderColor: 'rgba(241, 157, 82, 0.30)',
+        barThickness: 20, // 막대 두께 조절
+        backgroundColor: (context: ScriptableContext<'bar'>) => {
+          const chart = context.chart;
+          const { ctx, chartArea } = chart;
 
-        return gradient || undefined;
+          if (!chartArea) {
+            return undefined;
+          }
+
+          const gradient = ctx.createLinearGradient(
+            chartArea.left,
+            0,
+            chartArea.right,
+            0,
+          );
+
+          gradient.addColorStop(0, 'rgba(241, 157, 82, 0.16)');
+          gradient.addColorStop(1, 'rgba(237, 112, 45, 0.80)');
+
+          return gradient;
+        },
       },
-    },
-  ],
-};
+    ],
+  };
 
-export const BarChart = () => {
   return (
     <div className={styles.container}>
-      <Bar options={options} data={data} />
+      <h3 className={styles.chartTitle}>Q. {dataMap[0].questionText}</h3>
+      <div style={{ width: '100%', height: '250px' }}>
+        <Bar options={options} data={data} />
+      </div>
     </div>
   );
 };

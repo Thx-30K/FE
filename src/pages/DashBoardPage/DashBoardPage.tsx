@@ -96,7 +96,7 @@ export const DashBoardPage = () => {
       {/* TODO: 그래프 영역 */}
       <div className={styles.middleContent}>
         <div className={styles.doughnutContainer}>
-          <div className={styles.doughnutTitle}>{'검색 결과'}</div>
+          <div className={styles.doughnutTitle}>{entry && entry[0]} 분포</div>
           <div className={styles.doughnutSection}>
             {/* 차트 들어갈 곳 */}
             {entry ? (
@@ -120,10 +120,10 @@ export const DashBoardPage = () => {
             </div>
           </div>
           <div className={styles.barSection}>
-            <div className={styles.barTitle}>{'바 차트 이름'}</div>
+            <div className={styles.barTitle}>{'패널의 답변'}</div>
             <div className={styles.barContent}>
               {/* 차트 들어갈 곳 */}
-              <BarChart />
+              <BarChart dataMap={dashboardData?.questionStats} />
             </div>
           </div>
         </div>
