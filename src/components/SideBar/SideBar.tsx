@@ -5,6 +5,7 @@ import OPEN from '@/assets/history-icon.svg';
 import BACK from '@/assets/history-back-icon.svg';
 import HISTORY from '@/assets/history.svg';
 import { useNavigate } from 'react-router-dom';
+import { saveHistory } from '@/utils/saveHistory';
 
 const SideBar = () => {
   const nav = useNavigate();
@@ -50,6 +51,7 @@ const SideBar = () => {
               className={s.historyBox}
               key={idx}
               onClick={() => {
+                saveHistory(item.title);
                 nav(`/dashboard?query=${item.title}`);
                 setIsOpen(false);
               }}

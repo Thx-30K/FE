@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styles from './SearchBar.module.scss';
 import { searchIcon } from '@/assets';
 import { useNavigate } from 'react-router-dom';
+import { saveHistory } from '@/utils/saveHistory';
 
 export const SearchBar = ({ placeholder }: { placeholder?: string }) => {
   const [query, setQuery] = useState('');
@@ -10,16 +11,7 @@ export const SearchBar = ({ placeholder }: { placeholder?: string }) => {
   const onSearchSubmit = () => {
     if (!query.trim()) return;
 
-    let prevHistory = JSON.parse(localStorage.getItem('history') || '[]');
-
-    prevHistory = prevHistory.filter(
-      (item: { title: string }) => item.title !== query,
-    );
-
-    const newItem = { title: query };
-    const newHistory = [newItem, ...prevHistory];
-
-    localStorage.setItem('history', JSON.stringify(newHistory));
+    saveHistory(query);
 
     nav(`/dashboard?query=${query}`);
     setQuery('');
