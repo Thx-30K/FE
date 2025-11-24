@@ -7,7 +7,6 @@ import { LineAreaChart } from './components/charts/LineAreaChart';
 import { BarChart } from './components/charts/BarChart';
 import { useEffect, useState } from 'react';
 import { CardDetail } from './components/CardDetail/CardDetail';
-import type { SearchData } from '@/types/Card';
 import { ExportSelect } from './components/ExportSelect/ExportSelect';
 import { PanelTable } from './components/Table/PanelTable';
 import { api } from '@/apis/instance';
@@ -19,6 +18,7 @@ export const DashBoardPage = () => {
     null,
   );
   const [cardDetailVisible, setCardDetailVisible] = useState(false);
+  const [cardDetailNumber, setCardDetailNumber] = useState<number | null>(null);
   const nav = useNavigate();
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
@@ -56,10 +56,13 @@ export const DashBoardPage = () => {
   return (
     <div className={styles.container}>
       {/* 카드 클릭 시 */}
-      {cardDetailVisible && (
+      {cardDetailVisible && cardDetailNumber && (
         <CardDetail
-          data={cards[0]}
-          onClick={() => setCardDetailVisible(false)}
+          data={dashboardData?.scenarios[cardDetailNumber]}
+          onClick={() => {
+            setCardDetailVisible(false);
+            setCardDetailNumber(null);
+          }}
         />
       )}
       {/* 검색 및 카드 영역 */}
@@ -87,7 +90,10 @@ export const DashBoardPage = () => {
               <Card
                 key={i}
                 data={data}
-                onClick={() => setCardDetailVisible(true)}
+                onClick={() => {
+                  setCardDetailVisible(true);
+                  setCardDetailNumber(i);
+                }}
               />
             ))}
           </div>
@@ -146,41 +152,3 @@ export const DashBoardPage = () => {
     </div>
   );
 };
-
-const cards: SearchData[] = [
-  {
-    id: 1,
-    tags: ['여자', '남자', '20대', '30대'],
-    query: '넷플릭스를 자주보는 서울 20대 남성',
-    count: 120,
-    img: '',
-  },
-  {
-    id: 1,
-    tags: ['여자', '남자', '20대', '30대'],
-    query: '넷플릭스를 자주보는 서울 20대 남성',
-    count: 120,
-    img: '',
-  },
-  {
-    id: 1,
-    tags: ['여자', '남자', '20대', '30대'],
-    query: '넷플릭스를 자주보는 서울 20대 남성',
-    count: 120,
-    img: '',
-  },
-  {
-    id: 1,
-    tags: ['여자', '남자', '20대', '30대'],
-    query: '넷플릭스를 자주보는 서울 20대 남성',
-    count: 120,
-    img: '',
-  },
-  {
-    id: 1,
-    tags: ['여자', '남자', '20대', '30대'],
-    query: '넷플릭스를 자주보는 서울 20대 남성',
-    count: 120,
-    img: '',
-  },
-];
