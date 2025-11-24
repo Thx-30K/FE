@@ -4,6 +4,7 @@ import styles from './PanelTable.module.scss';
 import type { PanelDetail, PanelTableProps } from '@/types/Table';
 
 const ITEMS_PER_PAGE = 10;
+const PAGE_GROUP_SIZE = 10;
 
 export const PanelTable = ({ panelDetails }: PanelTableProps) => {
   const [panelData, setPanelData] = useState<PanelDetail[] | undefined | null>(
@@ -23,6 +24,13 @@ export const PanelTable = ({ panelDetails }: PanelTableProps) => {
 
   // 현재 페이지에 보여줄 데이터
   const currentData = panelData && panelData.slice(startIndex, endIndex);
+
+  // 현재 페이지가 속한 그룹 계산
+  const currentGroup = Math.ceil(currentPage / PAGE_GROUP_SIZE);
+
+  // 현재 그룹의 시작 페이지 번호와 끝 페이지 번호 계산
+  const startPage = (currentGroup - 1) * PAGE_GROUP_SIZE + 1;
+  const endPage = Math.min(startPage + PAGE_GROUP_SIZE - 1, totalPages || 1);
 
   // 페이지 변경 핸들러
   const handlePageChange = (page: number) => {
@@ -107,7 +115,10 @@ export const PanelTable = ({ panelDetails }: PanelTableProps) => {
           ◀
         </span>
         <div className={styles.tableNumbers}>
-          {Array.from({ length: totalPages! }, (_, i) => i + 1).map((page) => (
+          {Array.from(
+            { length: endPage - startPage + 1 }, // 현재 그룹의 페이지 개수만큼 배열 생성
+            (_, i) => startPage + i, // startPage부터 번호 생성
+          ).map((page) => (
             <span
               key={page}
               className={`${currentPage === page && styles.active} ${
