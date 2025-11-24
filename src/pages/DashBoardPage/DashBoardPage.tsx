@@ -56,7 +56,7 @@ export const DashBoardPage = () => {
   return (
     <div className={styles.container}>
       {/* 카드 클릭 시 */}
-      {cardDetailVisible && cardDetailNumber && (
+      {cardDetailVisible && cardDetailNumber !== null && (
         <CardDetail
           data={dashboardData?.scenarios[cardDetailNumber]}
           onClick={() => {

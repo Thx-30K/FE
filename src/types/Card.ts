@@ -1,7 +1,21 @@
-import type { Scenario } from './Dashboard';
+import type {
+  DemographicsStats,
+  MonthlyIncomeStats,
+  Scenario,
+} from './Dashboard';
+import type { PanelDetail } from './Table';
 
 //Card 컴포넌트 props 타입
 export interface CardProps {
   data?: Scenario;
   onClick: () => void;
+  panelSize?: number;
+}
+
+// 시나리오 상세 데이터 객체
+export interface ScenarioDetail {
+  demographicsStats: DemographicsStats;
+  monthlyIncomeStats: MonthlyIncomeStats;
+  report: string;
+  panelDetails: PanelDetail[];
 }
