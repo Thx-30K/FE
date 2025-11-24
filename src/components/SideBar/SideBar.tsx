@@ -4,23 +4,21 @@ import s from './SideBar.module.scss';
 import OPEN from '@/assets/history-icon.svg';
 import BACK from '@/assets/history-back-icon.svg';
 import HISTORY from '@/assets/history.svg';
+import { useNavigate } from 'react-router-dom';
+import { saveHistory } from '@/utils/saveHistory';
 
 const SideBar = () => {
+  const nav = useNavigate();
+
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [historyList, setHistoryList] = useState<
-    { title: string; keywords: string[] }[]
-  >([]);
+  const [historyList, setHistoryList] = useState<{ title: string }[]>([]);
 
   useEffect(() => {
-    setHistoryList([
-      { title: '서울 사는 20대 남성', keywords: ['서울', '20대', '남성'] },
-      {
-        title: '넷플릭스를 자주 보는 30대 여성',
-        keywords: ['넷플릭스', '30대', '여성', 'OTT'],
-      },
-      { title: 'BMW를 타는 남성', keywords: ['남성', 'BMW', '면허'] },
-    ]);
-  }, []);
+    const saved = localStorage.getItem('history');
+    if (saved) {
+      setHistoryList(JSON.parse(saved));
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -49,15 +47,16 @@ const SideBar = () => {
 
         <div className={s.historyContainer}>
           {historyList.map((item, idx) => (
-            <div className={s.historyBox} key={idx}>
+            <div
+              className={s.historyBox}
+              key={idx}
+              onClick={() => {
+                saveHistory(item.title);
+                nav(`/dashboard?query=${item.title}`);
+                setIsOpen(false);
+              }}
+            >
               <p className={s.historyTitle}>{item.title}</p>
-              <div className={s.historyKeyword}>
-                {item.keywords.map((kw, i) => (
-                  <p className={s.keywordText} key={i}>
-                    #{kw}
-                  </p>
-                ))}
-              </div>
             </div>
           ))}
         </div>
