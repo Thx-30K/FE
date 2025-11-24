@@ -61,7 +61,13 @@ const options: ChartOptions<'line'> = {
         display: false,
       },
       ticks: {
-        display: false,
+        color: '#ffffff',
+        align: 'start',
+        font: {
+          size: 10,
+          weight: 'bold',
+          lineHeight: 1.2,
+        },
       },
     },
   },
