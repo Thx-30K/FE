@@ -46,12 +46,16 @@ const PALETTE_COLORS = [
   '#4BC0C0',
   '#9966FF',
   '#FF9F40',
-  '#C9CBCF',
-  '#FFCD56',
+  '#b3bfd7',
+  '#ffe2a0',
   '#4D5360',
   '#E7E9ED',
   '#71B37C',
   '#E6A57E',
+  '#38993c',
+  '#2f26b4',
+  '#9fc311',
+  '#a6179f',
 ];
 
 export const DoughnutChart = ({ dataMap, category }: DoughnutChartProps) => {
@@ -59,8 +63,18 @@ export const DoughnutChart = ({ dataMap, category }: DoughnutChartProps) => {
     return <div className={styles.emptyState}>데이터가 없습니다.</div>;
   }
 
-  const labels = Object.keys(dataMap);
-  const values = Object.values(dataMap);
+  const entries = Object.entries(dataMap);
+  const sortedEntries = entries.sort(([, a], [, b]) => b - a);
+  const topEntries = sortedEntries.slice(0, 9); // 상위 9개 데이터
+  const restEntries = sortedEntries.slice(9); // 나머지 데이터
+
+  if (restEntries.length > 0) {
+    const otherSum = restEntries.reduce((sum, [, value]) => sum + value, 0);
+    topEntries.push(['기타', otherSum]); // 끝에 추가
+  }
+
+  const labels = topEntries.map(([label]) => label);
+  const values = topEntries.map(([, value]) => value);
 
   const backgroundColors = labels.map((label, index) => {
     if (category === '성별') {
