@@ -3,6 +3,8 @@
 
   .chartLabelContainer {
     @include flex($gap: vw(20px));
+    width: 100%;
+    flex-wrap: wrap;
     .chartLabel {
       @include flex($gap: vw(10px));
       .colorBox {
