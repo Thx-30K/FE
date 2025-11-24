@@ -133,7 +133,9 @@ export const DashBoardPage = () => {
       {/* 표 영역 */}
       <div className={styles.bottomContent}>
         <div className={styles.bottomTitle}>
-          <span className={styles.resultCount}>검색된 패널 : {100}명</span>
+          <span className={styles.resultCount}>
+            검색된 패널 : {dashboardData?.panelDetails.length}명
+          </span>
           <div className={styles.exportContainer}>
             <ExportSelect />
             <div className={styles.exportButton}>내보내기</div>
