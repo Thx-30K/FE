@@ -10,14 +10,16 @@ export const SearchBar = ({ placeholder }: { placeholder?: string }) => {
   const onSearchSubmit = () => {
     if (!query.trim()) return;
 
-    const prevHistory = JSON.parse(localStorage.getItem('history') || '[]');
+    let prevHistory = JSON.parse(localStorage.getItem('history') || '[]');
 
-    const newHistoryItem = { title: query };
-
-    localStorage.setItem(
-      'history',
-      JSON.stringify([newHistoryItem, ...prevHistory]),
+    prevHistory = prevHistory.filter(
+      (item: { title: string }) => item.title !== query,
     );
+
+    const newItem = { title: query };
+    const newHistory = [newItem, ...prevHistory];
+
+    localStorage.setItem('history', JSON.stringify(newHistory));
 
     nav(`/dashboard?query=${query}`);
     setQuery('');
