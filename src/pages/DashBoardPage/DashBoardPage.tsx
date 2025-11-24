@@ -68,11 +68,11 @@ export const DashBoardPage = () => {
         <SearchBar placeholder={query!} />
         <div className={styles.searchSummary}>
           <div className={styles.SummaryTags}>
-            {tags.map((tag, index) => (
+            {/* {tags.map((tag, index) => (
               <span key={index} className={styles.SummaryTag}>
                 #{tag}
               </span>
-            ))}
+            ))} */}
           </div>
           <div className={styles.resultCount}>
             검색된 패널 : {dashboardData?.panelDetails.length}명
@@ -96,7 +96,7 @@ export const DashBoardPage = () => {
       {/* TODO: 그래프 영역 */}
       <div className={styles.middleContent}>
         <div className={styles.doughnutContainer}>
-          <div className={styles.doughnutTitle}>{entry && entry[0]} 분포</div>
+          <div className={styles.doughnutTitle}>인구 통계 분포</div>
           <div className={styles.doughnutSection}>
             {/* 차트 들어갈 곳 */}
             {entry ? (
@@ -145,7 +145,6 @@ export const DashBoardPage = () => {
   );
 };
 
-const tags = ['여자', '남자', '20대', '30대'];
 const cards: SearchData[] = [
   {
     id: 1,
