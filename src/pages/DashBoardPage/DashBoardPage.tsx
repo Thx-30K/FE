@@ -9,56 +9,46 @@ import { useEffect, useState } from 'react';
 import { CardDetail } from './components/CardDetail/CardDetail';
 import { ExportSelect } from './components/ExportSelect/ExportSelect';
 import { PanelTable } from './components/Table/PanelTable';
-import { api } from '@/apis/instance';
-import type { SurveyResponse, SurveyResultData } from '@/types/Dashboard';
+import type { SurveyResultData } from '@/types/Dashboard';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DashboardSkeleton } from './components/DashboardSkeleton/DashboardSkeleton';
+import { useQuery } from '@tanstack/react-query';
+import { fetchDashboardData } from '@/apis/dashboard';
 
 export const DashBoardPage = () => {
-  const [dashboardData, setDashboardData] = useState<SurveyResultData | null>(
-    null,
-  );
-  const [loading, setLoading] = useState<boolean>(true);
-  const [cardDetailVisible, setCardDetailVisible] = useState(false);
-  const [cardDetailNumber, setCardDetailNumber] = useState<number | null>(null);
   const nav = useNavigate();
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
+
+  const [cardDetailVisible, setCardDetailVisible] = useState(false);
+  const [cardDetailNumber, setCardDetailNumber] = useState<number | null>(null);
+
+  const {
+    data: dashboardData,
+    isPending,
+    isError,
+    error,
+  } = useQuery<SurveyResultData>({
+    queryKey: ['dashboard', query], // query 변경시 자동 재호출
+    queryFn: () => fetchDashboardData(query!),
+    enabled: !!query,
+    staleTime: 1000 * 60 * 10, // 10분간 데이터 신선함 유지
+    retry: 1, // 실패 시 1회 재시도
+  });
+
+  useEffect(() => {
+    if (isError) {
+      console.error('Error fetching data:', error);
+      alert('데이터를 불러오는 데 실패했습니다.');
+      nav('/', { replace: true });
+    }
+  }, [isError, error, nav]);
 
   // 차트 관련 데이터 매핑
   const stats = dashboardData?.demographicsStats?.stats;
   const entry = stats ? Object.entries(stats)[0] : null;
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        if (!query) return;
-        setLoading(true);
-        console.log(query);
-
-        const res = await api.get<SurveyResponse>(`/api/querys?query=${query}`);
-        if (res.data.httpStatus === 200) {
-          setDashboardData(res.data.data);
-          console.log('getData');
-        } else {
-          throw new Error('Failed to fetch data');
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
-        alert('데이터를 불러오는 데 실패했습니다.');
-        nav('/', { replace: true });
-      } finally {
-        setLoading(false);
-      }
-    };
-    getData();
-  }, [query]);
-
-  useEffect(() => {
-    console.log(dashboardData);
-  }, [dashboardData]);
-
-  if (loading) {
+  if (isPending) {
     return <DashboardSkeleton query={query!} />;
   }
 
