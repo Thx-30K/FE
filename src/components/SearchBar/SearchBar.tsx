@@ -8,6 +8,17 @@ export const SearchBar = ({ placeholder }: { placeholder?: string }) => {
   const nav = useNavigate();
 
   const onSearchSubmit = () => {
+    if (!query.trim()) return;
+
+    const prevHistory = JSON.parse(localStorage.getItem('history') || '[]');
+
+    const newHistoryItem = { title: query };
+
+    localStorage.setItem(
+      'history',
+      JSON.stringify([newHistoryItem, ...prevHistory]),
+    );
+
     nav(`/dashboard?query=${query}`);
     setQuery('');
   };
