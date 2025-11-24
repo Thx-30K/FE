@@ -63,6 +63,8 @@ export const DashBoardPage = () => {
             setCardDetailVisible(false);
             setCardDetailNumber(null);
           }}
+          panelSize={dashboardData?.panelDetails.length}
+          originLineChartData={dashboardData?.monthlyIncomeStats.incomeRatios}
         />
       )}
       {/* 검색 및 카드 영역 */}

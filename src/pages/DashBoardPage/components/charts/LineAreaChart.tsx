@@ -67,13 +67,14 @@ const options: ChartOptions<'line'> = {
   },
 };
 
-export const LineAreaChart = ({ dataMap }: LineAreaChartProps) => {
+export const LineAreaChart = ({ dataMap, dataMap2 }: LineAreaChartProps) => {
   if (!dataMap || Object.keys(dataMap).length === 0) {
     return <div className={styles.emptyState}>데이터가 없습니다.</div>;
   }
 
   const labels = Object.keys(dataMap);
   const values = Object.values(dataMap);
+  const values2 = dataMap2 ? Object.values(dataMap2) : [];
 
   const data: ChartData<'line'> = {
     labels,
@@ -112,6 +113,34 @@ export const LineAreaChart = ({ dataMap }: LineAreaChartProps) => {
       },
     ],
   };
+
+  if (dataMap2 && values2.length > 0) {
+    data.datasets.push({
+      fill: true,
+      label: '응답자 비율(%)',
+      data: values2,
+      pointBackgroundColor: '#5E9FF2',
+      pointBorderColor: '#FFFFFF',
+      pointBorderWidth: 2,
+      tension: 0.3,
+      borderColor: '#5E9FF2',
+      order: 1, // 겹칠 때 순서 (앞에 그려짐)
+      backgroundColor: (context: ScriptableContext<'line'>) => {
+        const { ctx, chartArea } = context.chart;
+        if (!chartArea) return undefined;
+
+        const gradient = ctx.createLinearGradient(
+          0,
+          chartArea.bottom,
+          0,
+          chartArea.top,
+        );
+        gradient.addColorStop(0, 'rgba(94, 159, 242, 0.00)');
+        gradient.addColorStop(1, 'rgba(94, 159, 242, 0.60)');
+        return gradient;
+      },
+    });
+  }
 
   return (
     <div className={styles.container}>

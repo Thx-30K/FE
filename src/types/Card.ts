@@ -10,6 +10,7 @@ export interface CardProps {
   data?: Scenario;
   onClick: () => void;
   panelSize?: number;
+  originLineChartData?: Record<string, number>;
 }
 
 // 시나리오 상세 데이터 객체

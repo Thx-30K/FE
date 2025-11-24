@@ -8,7 +8,12 @@ import { useEffect, useState } from 'react';
 import { PanelTable } from '../Table/PanelTable';
 import { api } from '@/apis/instance';
 
-export const CardDetail = ({ data, onClick, panelSize }: CardProps) => {
+export const CardDetail = ({
+  data,
+  onClick,
+  panelSize,
+  originLineChartData,
+}: CardProps) => {
   const [detailData, setDetailData] = useState<ScenarioDetail | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -88,7 +93,8 @@ export const CardDetail = ({ data, onClick, panelSize }: CardProps) => {
               <div className={styles.barContent}>
                 {/* 차트 들어갈 곳 */}
                 <LineAreaChart
-                  dataMap={detailData?.monthlyIncomeStats?.incomeRatios}
+                  dataMap={originLineChartData}
+                  dataMap2={detailData?.monthlyIncomeStats?.incomeRatios}
                 />
               </div>
             </div>
