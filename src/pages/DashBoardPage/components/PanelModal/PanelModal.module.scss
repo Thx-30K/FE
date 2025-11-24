@@ -36,16 +36,22 @@
   }
   .id {
   }
+
+  .summary {
+  }
+
   .content {
-    @include flex($gap: vw(30px));
-    row-gap: vw(10px);
-    flex-wrap: wrap;
-    .tag {
-      @include flex();
-      width: vw(160px);
-      padding: vw(10px);
-      border-radius: 50px;
-      background: rgba(241, 157, 82, 0.4);
+    @include flex(column, $gap: vw(10px));
+    .qDataContent {
+      @include flex(column, $gap: vw(5px));
+      font-size: vw(20px);
+      .qDataQuestion {
+      }
+      .qDataAnswer {
+        padding: vw(10px);
+        border-radius: 50px;
+        background: rgba(241, 157, 82, 0.4);
+      }
     }
   }
 }

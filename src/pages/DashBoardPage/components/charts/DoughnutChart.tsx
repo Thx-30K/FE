@@ -5,9 +5,11 @@ import {
   Tooltip,
   Legend,
   type ChartOptions,
+  type ChartData,
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import styles from './DoughnutChart.module.scss';
+import type { DoughnutChartProps } from '@/types/Chart';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -17,7 +19,6 @@ const options: ChartOptions<'doughnut'> = {
   cutout: '30%',
   circumference: 360,
   animation: {
-    animateScale: true,
     animateRotate: true,
   },
   plugins: {
@@ -31,41 +32,81 @@ const options: ChartOptions<'doughnut'> = {
   },
 };
 
-const data = {
-  labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-  datasets: [
-    {
-      label: '# of Votes',
-      data: [12, 19, 3, 5, 2, 3],
-      backgroundColor: [
-        'rgba(255, 99, 132, 1)',
-        'rgba(54, 162, 235, 1)',
-        'rgba(255, 206, 86, 1)',
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)',
-      ],
-      // borderColor: 'rgba(255, 255, 255, 1)',
-      borderWidth: 0,
-    },
-  ],
+// 성별용 고정 색상
+const GENDER_COLORS: Record<string, string> = {
+  F: 'rgba(255, 99, 132, 1)',
+  M: 'rgba(54, 162, 235, 1)',
 };
 
-export const DoughnutChart = () => {
+// 연령대, 지역 등을 위한 랜덤 색상
+const PALETTE_COLORS = [
+  '#FF6384',
+  '#36A2EB',
+  '#FFCE56',
+  '#4BC0C0',
+  '#9966FF',
+  '#FF9F40',
+  '#b3bfd7',
+  '#ffe2a0',
+  '#4D5360',
+  '#E7E9ED',
+  '#71B37C',
+  '#E6A57E',
+  '#38993c',
+  '#2f26b4',
+  '#9fc311',
+  '#a6179f',
+];
+
+export const DoughnutChart = ({ dataMap, category }: DoughnutChartProps) => {
+  if (!dataMap || Object.keys(dataMap).length === 0) {
+    return <div className={styles.emptyState}>데이터가 없습니다.</div>;
+  }
+
+  const entries = Object.entries(dataMap);
+  const sortedEntries = entries.sort(([, a], [, b]) => b - a);
+  const topEntries = sortedEntries.slice(0, 9); // 상위 9개 데이터
+  const restEntries = sortedEntries.slice(9); // 나머지 데이터
+
+  if (restEntries.length > 0) {
+    const otherSum = restEntries.reduce((sum, [, value]) => sum + value, 0);
+    topEntries.push(['기타', otherSum]); // 끝에 추가
+  }
+
+  const labels = topEntries.map(([label]) => label);
+  const values = topEntries.map(([, value]) => value);
+
+  const backgroundColors = labels.map((label, index) => {
+    if (category === '성별') {
+      return GENDER_COLORS[label] || '#999999'; // 매칭 안되면 회색
+    }
+    return PALETTE_COLORS[index % PALETTE_COLORS.length];
+  });
+
+  const data: ChartData<'doughnut'> = {
+    labels,
+    datasets: [
+      {
+        data: values,
+        backgroundColor: backgroundColors,
+        borderWidth: 0, // 경계선 없음
+      },
+    ],
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.chartContainer}>
         <Doughnut options={options} data={data} />
+        <span className={styles.centerText}>{category}</span>
       </div>
       <div className={styles.chartLabelContainer}>
-        {data.labels.map((label, index) => (
+        {labels.map((label, index) => (
           <div key={index} className={styles.chartLabel}>
             <div
               className={styles.colorBox}
               style={{
-                backgroundColor: data.datasets[0].backgroundColor[
-                  index
-                ] as string,
+                backgroundColor: backgroundColors[index],
               }}
             ></div>
             <div className={styles.labelText}>{label}</div>

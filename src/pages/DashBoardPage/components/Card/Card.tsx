@@ -1,28 +1,38 @@
-import type { CardProps } from '@/types/Card';
 import styles from './Card.module.scss';
+import type { Scenario } from '@/types/Dashboard';
 
-export const Card = ({ data, onClick }: CardProps) => {
+export const Card = ({
+  data,
+  onClick,
+}: {
+  data: Scenario;
+  onClick: () => void;
+}) => {
   return (
     <div className={styles.card}>
       <div className={styles.cardTop}>
         <img src="" alt="" />
-        <div className={styles.cardQuery}>{data.query}</div>
+        <div className={styles.cardQuery}>{data.text}</div>
       </div>
       <div className={styles.cardBottom}>
         <div className={styles.cardTags}>
-          {data.tags.map((tag, index) => (
-            <span key={index} className={styles.cardTag}>
-              {tag}
-            </span>
-          ))}
+          {data.tags
+            .filter(
+              (tag) => tag.values?.length !== 0 && tag.values !== undefined,
+            )
+            .map((tag, index) => (
+              <span key={index} className={styles.cardTag}>
+                {tag.values && tag.values[0]}
+              </span>
+            ))}
         </div>
         <div className={styles.cardInfo}>
-          <div className={styles.cardCount}>
+          {/* <div className={styles.cardCount}>
             패널 수 : {data.count}명{' '}
             <span>
               (20명 <span>▲</span>)
             </span>
-          </div>
+          </div> */}
           <div className={styles.cardButton} onClick={onClick}>
             자세히 보기
           </div>

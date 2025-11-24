@@ -1,27 +1,29 @@
 import { useState } from 'react';
 import styles from './SearchBar.module.scss';
 import { searchIcon } from '@/assets';
+import { useNavigate } from 'react-router-dom';
 
-// 검색 제출 시 호출할 함수(API 호출) 받기
-interface SearchBarProps {
-  onSearchSubmit: (query: string) => void;
-}
-
-export const SearchBar = ({ onSearchSubmit }: SearchBarProps) => {
+export const SearchBar = ({ placeholder }: { placeholder?: string }) => {
   const [query, setQuery] = useState('');
+  const nav = useNavigate();
+
+  const onSearchSubmit = () => {
+    nav(`/dashboard?query=${query}`);
+    setQuery('');
+  };
 
   return (
     <form
       className={styles.container}
       onSubmit={(e) => {
         e.preventDefault();
-        onSearchSubmit(query);
+        onSearchSubmit();
       }}
     >
       <input
         className={styles.input}
         type="search"
-        placeholder="search..."
+        placeholder={placeholder || 'search...'}
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />

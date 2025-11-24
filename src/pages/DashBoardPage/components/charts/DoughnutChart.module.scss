@@ -2,7 +2,10 @@
   @include flex(column, $gap: vw(20px));
 
   .chartLabelContainer {
-    @include flex($gap: vw(20px));
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: vw(10px);
     .chartLabel {
       @include flex($gap: vw(10px));
       .colorBox {
@@ -28,6 +31,14 @@
     padding: vw(20px);
     box-shadow: 4px 4px 4px 0 rgba(255, 255, 255, 0.25) inset;
 
+    .centerText {
+      position: absolute;
+      color: $color-white;
+      font-size: vw(30px);
+      font-weight: 500;
+      line-height: 120%;
+      letter-spacing: -0.6px;
+    }
     &::after {
       content: '';
       position: absolute;
