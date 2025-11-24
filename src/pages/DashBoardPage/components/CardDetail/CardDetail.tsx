@@ -7,6 +7,7 @@ import { ExportSelect } from '../ExportSelect/ExportSelect';
 import { useEffect, useState } from 'react';
 import { PanelTable } from '../Table/PanelTable';
 import { api } from '@/apis/instance';
+import { CardDetailSkeleton } from './CardDetailSkeleton';
 
 export const CardDetail = ({
   data,
@@ -49,9 +50,12 @@ export const CardDetail = ({
     }
   }, [data]);
 
+  if (loading) {
+    return <CardDetailSkeleton data={data} onClick={onClick} />;
+  }
+
   return (
     <div className={styles.container}>
-      {loading && <div className={styles.loading}></div>}
       <div className={styles.closeButton} onClick={onClick}>
         <img src={cardCloseIcon} alt="cancel" />
       </div>
