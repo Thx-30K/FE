@@ -24,6 +24,8 @@ ChartJS.register(
 );
 
 const options: ChartOptions<'bar'> = {
+  responsive: true,
+  maintainAspectRatio: false,
   indexAxis: 'y' as const,
   elements: {
     bar: {
@@ -31,7 +33,6 @@ const options: ChartOptions<'bar'> = {
       borderRadius: 5,
     },
   },
-  responsive: true,
   plugins: {
     legend: {
       display: false,
@@ -123,7 +124,7 @@ export const BarChart = ({ dataMap }: BarChartProps) => {
   return (
     <div className={styles.container}>
       <h3 className={styles.chartTitle}>Q. {dataMap[0].questionText}</h3>
-      <div style={{ width: '100%', height: '250px' }}>
+      <div style={{ width: '90%', height: '250px' }}>
         <Bar options={options} data={data} />
       </div>
     </div>
