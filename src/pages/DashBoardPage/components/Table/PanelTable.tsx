@@ -75,14 +75,6 @@ export const PanelTable = ({ panelDetails }: PanelTableProps) => {
                   <PanelModal
                     panelId={panel.id}
                     id={panel.mbSn}
-                    tags={[
-                      'test',
-                      '25',
-                      '300만원',
-                      '300만원',
-                      '300만원',
-                      '300만원',
-                    ]}
                     onMouseLeave={() => setPanelModalNumber(null)}
                   />
                 )}
