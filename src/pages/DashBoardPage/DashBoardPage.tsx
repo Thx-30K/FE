@@ -68,11 +68,11 @@ export const DashBoardPage = () => {
         <SearchBar placeholder={query!} />
         <div className={styles.searchSummary}>
           <div className={styles.SummaryTags}>
-            {/* {tags.map((tag, index) => (
+            {dashboardData?.tags.map((tag, index) => (
               <span key={index} className={styles.SummaryTag}>
                 #{tag}
               </span>
-            ))} */}
+            ))}
           </div>
           <div className={styles.resultCount}>
             검색된 패널 : {dashboardData?.panelDetails.length}명
