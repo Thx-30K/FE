@@ -47,7 +47,7 @@ export const DashBoardPage = () => {
       }
     };
     getData();
-  }, []);
+  }, [query]);
 
   useEffect(() => {
     console.log(dashboardData);
@@ -115,7 +115,7 @@ export const DashBoardPage = () => {
             <div className={styles.barContent}>
               {/* 차트 들어갈 곳 */}
               <LineAreaChart
-                dataMap={dashboardData?.monthlyIncomeStats.incomeRatios}
+                dataMap={dashboardData?.monthlyIncomeStats?.incomeRatios}
               />
             </div>
           </div>

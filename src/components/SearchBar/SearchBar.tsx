@@ -9,6 +9,7 @@ export const SearchBar = ({ placeholder }: { placeholder?: string }) => {
 
   const onSearchSubmit = () => {
     nav(`/dashboard?query=${query}`);
+    setQuery('');
   };
 
   return (
