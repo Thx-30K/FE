@@ -6,22 +6,10 @@ import { cardCloseIcon } from '@/assets';
 import { ExportSelect } from '../ExportSelect/ExportSelect';
 import { useEffect } from 'react';
 import { PanelTable } from '../Table/PanelTable';
-import { api } from '@/apis/instance';
 import { CardDetailSkeleton } from './CardDetailSkeleton';
 import { formatReportText } from '@/utils/textFormat';
 import { useQuery } from '@tanstack/react-query';
-
-const fetchScenarioDetail = async (payload: {
-  scenarioText: string;
-  scenarioType: string;
-  originalPanels: number;
-}) => {
-  const { data } = await api.post('/api/scenario', payload);
-  if (data.httpStatus !== 200) {
-    throw new Error('Failed to fetch detail data');
-  }
-  return data.data;
-};
+import { fetchScenarioDetail } from '@/apis/dashboard';
 
 export const CardDetail = ({
   data,

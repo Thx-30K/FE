@@ -20,3 +20,9 @@ export interface ScenarioDetail {
   report: string;
   panelDetails: PanelDetail[];
 }
+
+export interface ScenarioPayload {
+  scenarioText: string;
+  scenarioType: string;
+  originalPanels: number;
+}

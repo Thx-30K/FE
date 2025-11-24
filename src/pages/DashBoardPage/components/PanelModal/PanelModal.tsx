@@ -1,30 +1,8 @@
 import { useEffect } from 'react';
 import styles from './PanelModal.module.scss';
-import { api } from '@/apis/instance';
 import { useQuery } from '@tanstack/react-query';
-
-interface PanelModalProps {
-  panelId: number;
-  id: string;
-}
-
-interface PanelData {
-  intro?: string;
-  qaPairs: [
-    {
-      question: string;
-      answer: string;
-    },
-  ];
-}
-
-const fetchPanelModalData = async (panelId: number) => {
-  const { data } = await api.get(`/api/querys/${panelId}`);
-  if (data.httpStatus !== 200) {
-    throw new Error('Failed to fetch data');
-  }
-  return data.data; // 실제 데이터(SurveyResultData)만 반환
-};
+import { fetchPanelModalData } from '@/apis/dashboard';
+import type { PanelData, PanelModalProps } from '@/types/Panel';
 
 export const PanelModal = ({ panelId, id }: PanelModalProps) => {
   const {

@@ -9,19 +9,11 @@ import { useEffect, useState } from 'react';
 import { CardDetail } from './components/CardDetail/CardDetail';
 import { ExportSelect } from './components/ExportSelect/ExportSelect';
 import { PanelTable } from './components/Table/PanelTable';
-import { api } from '@/apis/instance';
-import type { SurveyResponse, SurveyResultData } from '@/types/Dashboard';
+import type { SurveyResultData } from '@/types/Dashboard';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DashboardSkeleton } from './components/DashboardSkeleton/DashboardSkeleton';
 import { useQuery } from '@tanstack/react-query';
-
-const fetchDashboardData = async (query: string) => {
-  const { data } = await api.get<SurveyResponse>(`/api/querys?query=${query}`);
-  if (data.httpStatus !== 200) {
-    throw new Error('Failed to fetch data');
-  }
-  return data.data; // 실제 데이터(SurveyResultData)만 반환
-};
+import { fetchDashboardData } from '@/apis/dashboard';
 
 export const DashBoardPage = () => {
   const nav = useNavigate();
