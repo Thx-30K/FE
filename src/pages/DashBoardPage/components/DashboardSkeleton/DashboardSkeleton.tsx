@@ -9,7 +9,7 @@ import { ExportSelect } from '../ExportSelect/ExportSelect';
 export const DashboardSkeleton = ({ query }: { query?: string }) => {
   return (
     // 다크 모드 테마 적용 (배경색에 맞춰 baseColor 조절 필요)
-    <SkeletonTheme baseColor="#636363" highlightColor="#5a5a5a">
+    <SkeletonTheme baseColor="#5a4b4b" highlightColor="#2d2121">
       <div className={styles.container}>
         {/* 상단 영역 */}
         <div className={styles.topContent}>
