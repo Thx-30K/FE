@@ -7,20 +7,14 @@ import HISTORY from '@/assets/history.svg';
 
 const SideBar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [historyList, setHistoryList] = useState<
-    { title: string; keywords: string[] }[]
-  >([]);
+  const [historyList, setHistoryList] = useState<{ title: string }[]>([]);
 
   useEffect(() => {
-    setHistoryList([
-      { title: '서울 사는 20대 남성', keywords: ['서울', '20대', '남성'] },
-      {
-        title: '넷플릭스를 자주 보는 30대 여성',
-        keywords: ['넷플릭스', '30대', '여성', 'OTT'],
-      },
-      { title: 'BMW를 타는 남성', keywords: ['남성', 'BMW', '면허'] },
-    ]);
-  }, []);
+    const saved = localStorage.getItem('history');
+    if (saved) {
+      setHistoryList(JSON.parse(saved));
+    }
+  }, [isOpen]);
 
   return (
     <>
@@ -51,13 +45,6 @@ const SideBar = () => {
           {historyList.map((item, idx) => (
             <div className={s.historyBox} key={idx}>
               <p className={s.historyTitle}>{item.title}</p>
-              <div className={s.historyKeyword}>
-                {item.keywords.map((kw, i) => (
-                  <p className={s.keywordText} key={i}>
-                    #{kw}
-                  </p>
-                ))}
-              </div>
             </div>
           ))}
         </div>
