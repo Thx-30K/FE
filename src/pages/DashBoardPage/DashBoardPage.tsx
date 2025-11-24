@@ -93,7 +93,7 @@ export const DashBoardPage = () => {
           </div>
         </div>
       </div>
-      {/* TODO: 그래프 영역 */}
+      {/* 그래프 영역 */}
       <div className={styles.middleContent}>
         <div className={styles.doughnutContainer}>
           <div className={styles.doughnutTitle}>인구 통계 분포</div>

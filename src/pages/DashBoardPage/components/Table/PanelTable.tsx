@@ -72,11 +72,7 @@ export const PanelTable = ({ panelDetails }: PanelTableProps) => {
               <td>
                 {panel.mbSn || '-'}
                 {panelModalNumber === panel.id && (
-                  <PanelModal
-                    panelId={panel.id}
-                    id={panel.mbSn}
-                    onMouseLeave={() => setPanelModalNumber(null)}
-                  />
+                  <PanelModal panelId={panel.id} id={panel.mbSn} />
                 )}
               </td>
               <td>{panel.gender || '-'}</td>

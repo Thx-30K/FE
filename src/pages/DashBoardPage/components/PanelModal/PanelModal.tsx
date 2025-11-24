@@ -5,7 +5,6 @@ import { api } from '@/apis/instance';
 interface PanelModalProps {
   panelId: number;
   id: string;
-  onMouseLeave: () => void;
 }
 
 interface PanelData {
@@ -18,7 +17,7 @@ interface PanelData {
   ];
 }
 
-export const PanelModal = ({ panelId, id, onMouseLeave }: PanelModalProps) => {
+export const PanelModal = ({ panelId, id }: PanelModalProps) => {
   const [panelData, setPanelData] = useState<PanelData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -35,7 +34,6 @@ export const PanelModal = ({ panelId, id, onMouseLeave }: PanelModalProps) => {
         }
       } catch (error) {
         console.error('Error fetching panel data:', error);
-        onMouseLeave();
       } finally {
         setLoading(false);
       }
@@ -46,7 +44,7 @@ export const PanelModal = ({ panelId, id, onMouseLeave }: PanelModalProps) => {
   }, [panelId]);
 
   return (
-    <div key={panelId} className={styles.container} onMouseLeave={onMouseLeave}>
+    <div key={panelId} className={styles.container}>
       <div className={styles.id}>{id}</div>
       <div className={styles.summary}>
         {loading
