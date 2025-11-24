@@ -23,6 +23,7 @@ export const DashBoardPage = () => {
   const [searchParams] = useSearchParams();
   const query = searchParams.get('query');
 
+  // 차트 관련 데이터 매핑
   const stats = dashboardData?.demographicsStats?.stats;
   const entry = stats ? Object.entries(stats)[0] : null;
 
@@ -110,10 +111,12 @@ export const DashBoardPage = () => {
         </div>
         <div className={styles.barContainer}>
           <div className={styles.barSection}>
-            <div className={styles.barTitle}>{'나이대별 평균 소득'}</div>
+            <div className={styles.barTitle}>{'월 소득 분포'}</div>
             <div className={styles.barContent}>
               {/* 차트 들어갈 곳 */}
-              <LineAreaChart />
+              <LineAreaChart
+                dataMap={dashboardData?.monthlyIncomeStats.incomeRatios}
+              />
             </div>
           </div>
           <div className={styles.barSection}>

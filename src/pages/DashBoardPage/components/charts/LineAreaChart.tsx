@@ -40,91 +40,82 @@ const options: ChartOptions<'line'> = {
     x: {
       beginAtZero: true,
       grid: {
-        color: 'transparent',
+        display: false,
       },
       ticks: {
         color: '#ffffff',
         align: 'start',
         font: {
+          size: 10,
           weight: 'bold',
           lineHeight: 1.2,
         },
+        maxRotation: 45, // 글자가 겹치면 살짝 기울임
+        minRotation: 0,
       },
     },
     y: {
       beginAtZero: true,
       grid: {
-        color: 'transparent',
+        display: false,
       },
       ticks: {
-        color: '#ffffff',
-        align: 'end',
-        font: {
-          weight: 'bold',
-          lineHeight: 1.2,
-        },
+        display: false,
       },
     },
   },
 };
 
-const labels = [
-  '1월',
-  '2월',
-  '3월',
-  '4월',
-  '5월',
-  '6월',
-  '7월',
-  '8월',
-  '9월',
-  '10월',
-  '11월',
-  '12월',
-];
+interface LineAreaChartProps {
+  dataMap?: Record<string, number>;
+}
 
-const data: ChartData<'line'> = {
-  labels,
-  datasets: [
-    {
-      fill: true,
-      label: 'Dataset 2',
-      data: labels.map(() => Math.random() * 1000),
-      pointBackgroundColor: '#F19D52',
-      pointBorderColor: '#FFF4CF',
-      pointBorderWidth: 2,
-      tension: 0.3,
-      borderColor: '#F19D52',
-      backgroundColor: (context: ScriptableContext<'line'>) => {
-        const chart = context.chart;
-        const { ctx, chartArea } = chart;
+export const LineAreaChart = ({ dataMap }: LineAreaChartProps) => {
+  if (!dataMap || Object.keys(dataMap).length === 0) {
+    return <div className={styles.emptyState}>데이터가 없습니다.</div>;
+  }
 
-        // chartArea가 정의되지 않았으면(초기화 전) 아무것도 반환하지 않습니다.
-        if (!chartArea) {
-          return undefined;
-        }
+  const labels = Object.keys(dataMap);
+  const values = Object.values(dataMap);
 
-        // 원본 코드의 createLinearGradient(0, 0, 0, 300)을
-        // 차트 영역(chartArea)에 맞게 동적으로 생성합니다.
-        // (0, chartArea.bottom) -> (0, chartArea.top)
-        const gradient = ctx.createLinearGradient(
-          0,
-          chartArea.bottom, // 그라데이션 시작 (아래)
-          0,
-          chartArea.top, // 그라데이션 끝 (위)
-        );
+  const data: ChartData<'line'> = {
+    labels,
+    datasets: [
+      {
+        fill: true, // 영역 채우기 (Area Chart 핵심)
+        label: '응답자 비율(%)',
+        data: values,
 
-        // 원본 코드의 colorStop을 그대로 사용
-        gradient.addColorStop(0, 'rgba(241, 157, 82, 0.60)');
-        gradient.addColorStop(1, 'rgba(241, 157, 82, 0.00)'); // 투명도 오타 수정 (0,0)
+        // 스타일링
+        pointBackgroundColor: '#F19D52',
+        pointBorderColor: '#FFFFFF',
+        pointBorderWidth: 2,
+        tension: 0.3,
+        borderColor: '#F19D52',
+        backgroundColor: (context: ScriptableContext<'line'>) => {
+          const chart = context.chart;
+          const { ctx, chartArea } = chart;
 
-        return gradient;
+          if (!chartArea) {
+            return undefined;
+          }
+
+          const gradient = ctx.createLinearGradient(
+            0,
+            chartArea.bottom, // 그라데이션 시작 (아래)
+            0,
+            chartArea.top, // 그라데이션 끝 (위)
+          );
+
+          gradient.addColorStop(0, 'rgba(241, 157, 82, 0.00)');
+          gradient.addColorStop(1, 'rgba(241, 157, 82, 0.60)');
+
+          return gradient;
+        },
       },
-    },
-  ],
-};
+    ],
+  };
 
-export const LineAreaChart = () => {
   return (
     <div className={styles.container}>
       <Line options={options} data={data} />
