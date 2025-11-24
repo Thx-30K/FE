@@ -14,6 +14,7 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 import styles from './LineAreaChart.module.scss';
+import type { LineAreaChartProps } from '@/types/Chart';
 
 ChartJS.register(
   CategoryScale,
@@ -65,10 +66,6 @@ const options: ChartOptions<'line'> = {
     },
   },
 };
-
-interface LineAreaChartProps {
-  dataMap?: Record<string, number>;
-}
 
 export const LineAreaChart = ({ dataMap }: LineAreaChartProps) => {
   if (!dataMap || Object.keys(dataMap).length === 0) {

@@ -9,6 +9,7 @@ import {
 } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import styles from './DoughnutChart.module.scss';
+import type { DoughnutChartProps } from '@/types/Chart';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -52,13 +53,6 @@ const PALETTE_COLORS = [
   '#71B37C',
   '#E6A57E',
 ];
-
-interface DoughnutChartProps {
-  // 백엔드 데이터 구조 중 하나를 받음
-  dataMap?: Record<string, number>;
-  // 현재 어떤 카테고리를 그리고 있는지 (색상 결정을 위해 필요)
-  category: '성별' | '연령대' | '지역' | '학력';
-}
 
 export const DoughnutChart = ({ dataMap, category }: DoughnutChartProps) => {
   if (!dataMap || Object.keys(dataMap).length === 0) {

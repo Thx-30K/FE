@@ -12,6 +12,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 import styles from './BarChart.module.scss';
+import type { BarChartProps } from '@/types/Chart';
 
 ChartJS.register(
   CategoryScale,
@@ -78,16 +79,6 @@ const options: ChartOptions<'bar'> = {
     },
   },
 };
-
-interface QuestionStat {
-  questionId: number;
-  questionText: string;
-  answers: Record<string, number>;
-}
-
-interface BarChartProps {
-  dataMap?: QuestionStat[];
-}
 
 export const BarChart = ({ dataMap }: BarChartProps) => {
   if (!dataMap || Object.keys(dataMap).length === 0) {
