@@ -41,6 +41,7 @@
       rgba($color-orange1, 0.36) 100%
     );
     .logo {
+      @include hoverEvent(1);
       width: vw(429.001px);
       height: vw(127.564px);
       margin-top: vw(128px);
@@ -229,6 +230,7 @@
         .exportButton {
           @include flex();
           @include glassTitle();
+          @include hoverEvent();
           color: $color-gray2;
           font-size: vw(24px);
           font-weight: 500;

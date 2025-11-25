@@ -68,11 +68,11 @@ export const CardDetailSkeleton = ({ data, onClick }: CardProps) => {
             {/* 테이블 모양 */}
             <div>
               <Skeleton
-                height={60}
+                height={vw(60)}
                 width={vw(1670)}
                 borderRadius="30px 30px 0 0"
               />
-              <Skeleton count={11} height={60} width={vw(1670)} />
+              <Skeleton count={11} height={vw(60)} width={vw(1670)} />
             </div>
           </div>
         </div>

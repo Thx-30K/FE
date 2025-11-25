@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Select, { type SingleValue, type StylesConfig } from 'react-select';
 import { type CSSObjectWithLabel } from 'react-select';
 
@@ -8,9 +8,9 @@ interface OptionType {
 }
 
 const exportOptions = [
-  { value: 'csv', label: '.csv' },
-  { value: 'pdf', label: '.pdf' },
   { value: 'xlsx', label: '.xlsx' },
+  { value: 'csv', label: '.csv' },
+  // { value: 'pdf', label: '.pdf' },
 ];
 
 const customStyles: StylesConfig<OptionType, false> = {
@@ -75,21 +75,25 @@ const customStyles: StylesConfig<OptionType, false> = {
   }),
 };
 
-export const ExportSelect = () => {
+interface ExportSelectProps {
+  setExportType?: (type: string) => void;
+}
+
+export const ExportSelect = ({ setExportType }: ExportSelectProps) => {
   const [selectedExportOption, setSelectedExportOption] = useState<
     SingleValue<OptionType>
   >(exportOptions[0]);
 
   const handleExportChange = (option: SingleValue<OptionType>) => {
-    setSelectedExportOption(option);
+    if (option && setExportType) {
+      setSelectedExportOption(option);
+      setExportType(option.value);
+    }
   };
-
-  useEffect(() => {
-    console.log(selectedExportOption);
-  }, []);
 
   return (
     <Select
+      value={selectedExportOption}
       defaultValue={exportOptions[0]}
       name="내보내기"
       options={exportOptions}

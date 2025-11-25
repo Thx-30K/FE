@@ -14,6 +14,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DashboardSkeleton } from './components/DashboardSkeleton/DashboardSkeleton';
 import { useQuery } from '@tanstack/react-query';
 import { fetchDashboardData } from '@/apis/dashboard';
+import { handleExport } from '@/utils/export';
 
 export const DashBoardPage = () => {
   const nav = useNavigate();
@@ -22,6 +23,8 @@ export const DashBoardPage = () => {
 
   const [cardDetailVisible, setCardDetailVisible] = useState(false);
   const [cardDetailNumber, setCardDetailNumber] = useState<number | null>(null);
+
+  const [exportType, setExportType] = useState<string>('xlsx');
 
   const {
     data: dashboardData,
@@ -68,7 +71,12 @@ export const DashBoardPage = () => {
       )}
       {/* 검색 및 카드 영역 */}
       <div className={styles.topContent}>
-        <img src={logo} className={styles.logo} alt="Logo" />
+        <img
+          src={logo}
+          className={styles.logo}
+          alt="Logo"
+          onClick={() => nav('/')}
+        />
         <SearchBar placeholder={query!} />
         <div className={styles.searchSummary}>
           <div className={styles.SummaryTags}>
@@ -144,8 +152,18 @@ export const DashBoardPage = () => {
             검색된 패널 : {dashboardData?.panelDetails.length}명
           </span>
           <div className={styles.exportContainer}>
-            <ExportSelect />
-            <div className={styles.exportButton}>내보내기</div>
+            <ExportSelect setExportType={setExportType} />
+            <div
+              className={styles.exportButton}
+              onClick={() =>
+                handleExport({
+                  panelDetails: dashboardData?.panelDetails || [],
+                  exportType: exportType,
+                })
+              }
+            >
+              내보내기
+            </div>
           </div>
         </div>
         <PanelTable panelDetails={dashboardData?.panelDetails} />
