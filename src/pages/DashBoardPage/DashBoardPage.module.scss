@@ -229,6 +229,7 @@
         .exportButton {
           @include flex();
           @include glassTitle();
+          @include hoverEvent();
           color: $color-gray2;
           font-size: vw(24px);
           font-weight: 500;
