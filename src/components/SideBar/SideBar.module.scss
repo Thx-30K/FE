@@ -153,6 +153,19 @@
   flex-direction: column;
   gap: vw(26px);
 
+  .emptyBox {
+    display: flex;
+    justify-content: center;
+    .emptyText {
+      color: $color-white;
+      font-size: vw(28px);
+      font-style: normal;
+      font-weight: 500;
+      line-height: 120%; /* 33.6px */
+      letter-spacing: -0.7px;
+    }
+  }
+
   .historyBox {
     width: vw(495px);
     height: vw(110px);
@@ -179,20 +192,6 @@
       font-weight: 500;
       line-height: 120%; /* 33.6px */
       letter-spacing: -0.7px;
-    }
-
-    .historyKeyword {
-      display: flex;
-      gap: vw(18px);
-
-      .keywordText {
-        color: $color-white;
-        font-size: vw(22px);
-        font-style: normal;
-        font-weight: 600;
-        line-height: 120%; /* 26.4px */
-        letter-spacing: -0.55px;
-      }
     }
   }
 }
