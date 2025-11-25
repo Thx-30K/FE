@@ -4,6 +4,13 @@ import LOGO from '@/assets/logo.svg';
 import ARROW from '@/assets/main/scrollArrow.svg';
 
 const Footer = () => {
+  const handleScrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className={s.footerContainer}>
       <div className={s.footerLeft}>
@@ -17,7 +24,7 @@ const Footer = () => {
       </div>
 
       <div className={s.footerRight}>
-        <img src={ARROW} className={s.arrowImg} />
+        <img src={ARROW} className={s.arrowImg} onClick={handleScrollTop} />
       </div>
     </div>
   );
