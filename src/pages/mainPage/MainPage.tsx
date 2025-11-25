@@ -13,14 +13,30 @@ import MEMORY from '../../assets/main/main-memory.svg';
 import ARROW from '@/assets/main/scrollArrow.svg';
 
 import { vw } from '@/utils/units';
+import { useEffect, useState } from 'react';
 
 const MainPage = () => {
+  const [showScrollImg, setShowScrollImg] = useState(false);
+
   const handleScrollTop = () => {
     window.scrollTo({
       top: 0,
       behavior: 'smooth',
     });
   };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 500) {
+        setShowScrollImg(true);
+      } else {
+        setShowScrollImg(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <div className={s.mainContainer}>
@@ -101,7 +117,9 @@ const MainPage = () => {
         <Footer />
       </ScrollMotion>
 
-      <img src={ARROW} className={s.arrowImg} onClick={handleScrollTop} />
+      {showScrollImg && (
+        <img src={ARROW} className={s.arrowImg} onClick={handleScrollTop} />
+      )}
     </div>
   );
 };
