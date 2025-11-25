@@ -71,7 +71,12 @@ export const DashBoardPage = () => {
       )}
       {/* 검색 및 카드 영역 */}
       <div className={styles.topContent}>
-        <img src={logo} className={styles.logo} alt="Logo" />
+        <img
+          src={logo}
+          className={styles.logo}
+          alt="Logo"
+          onClick={() => nav('/')}
+        />
         <SearchBar placeholder={query!} />
         <div className={styles.searchSummary}>
           <div className={styles.SummaryTags}>
