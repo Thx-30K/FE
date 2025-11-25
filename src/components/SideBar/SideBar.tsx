@@ -46,19 +46,25 @@ const SideBar = () => {
         </div>
 
         <div className={s.historyContainer}>
-          {historyList.map((item, idx) => (
-            <div
-              className={s.historyBox}
-              key={idx}
-              onClick={() => {
-                saveHistory(item.title);
-                nav(`/dashboard?query=${item.title}`);
-                setIsOpen(false);
-              }}
-            >
-              <p className={s.historyTitle}>{item.title}</p>
+          {historyList.length === 0 ? (
+            <div className={s.emptyBox}>
+              <p className={s.emptyText}>최근 검색 기록이 없습니다</p>
             </div>
-          ))}
+          ) : (
+            historyList.map((item, idx) => (
+              <div
+                className={s.historyBox}
+                key={idx}
+                onClick={() => {
+                  saveHistory(item.title);
+                  nav(`/dashboard?query=${item.title}`);
+                  setIsOpen(false);
+                }}
+              >
+                <p className={s.historyTitle}>{item.title}</p>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </>
