@@ -27,7 +27,7 @@ const MainPage = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 500) {
+      if (window.scrollY > window.innerHeight * 0.2) {
         setShowScrollImg(true);
       } else {
         setShowScrollImg(false);
