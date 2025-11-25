@@ -28,7 +28,10 @@ export const SearchBar = ({ placeholder }: { placeholder?: string }) => {
       <input
         className={styles.input}
         type="search"
-        placeholder={placeholder || 'search...'}
+        placeholder={
+          placeholder ||
+          '예) 서울 30대 남성, 넷플릭스를 좋아하는 경기도 20대 남성 300명'
+        }
         value={query}
         onChange={(e) => setQuery(e.target.value)}
       />
