@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { PanelModal } from '../PanelModal/PanelModal';
 import styles from './PanelTable.module.scss';
 import type { PanelDetail, PanelTableProps } from '@/types/Table';
+import { AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const ITEMS_PER_PAGE = 10;
 const PAGE_GROUP_SIZE = 10;
@@ -71,9 +73,27 @@ export const PanelTable = ({ panelDetails }: PanelTableProps) => {
               <td>{startIndex + index + 1}</td>
               <td>
                 {panel.mbSn || '-'}
-                {panelModalNumber === panel.id && (
-                  <PanelModal panelId={panel.id} id={panel.mbSn} />
-                )}
+                <AnimatePresence mode="popLayout">
+                  {panelModalNumber === panel.id && (
+                    <motion.div
+                      initial={{
+                        opacity: 0,
+                      }}
+                      animate={{
+                        opacity: 1,
+                      }}
+                      exit={{
+                        opacity: 0,
+                      }}
+                      transition={{
+                        duration: 0.3,
+                        ease: 'backInOut',
+                      }}
+                    >
+                      <PanelModal panelId={panel.id} id={panel.mbSn} />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </td>
               <td>{panel.gender || '-'}</td>
               <td>{panel.ageBand || '-'}</td>
