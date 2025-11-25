@@ -1,4 +1,4 @@
-import s from '../styles/Footer.module.scss';
+import s from './Footer.module.scss';
 
 import LOGO from '@/assets/logo.svg';
 
@@ -9,10 +9,8 @@ const Footer = () => {
 
       {/* 임시 푸터 내용 */}
       <div className={s.footerText}>
-        <p>FE 구혁모 김예나</p>
-        <p>BE 이가은 조주한 천성진</p>
-        <br />
-        <p>ⓒ HSU 25-2 기업연계캡스톤디자인 [데이터(삼)만개감사합니다] 팀 </p>
+        {`2071433 구혁모 2371429 김예나
+          2371355 이가은 2171089 조주한 2171102 천성진`}
       </div>
     </div>
   );

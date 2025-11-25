@@ -1,19 +1,43 @@
-import s from './MainPage.module.scss';
+import s from './styles/MainPage.module.scss';
 
-import MainTop from './components/MainTop';
-import ExplainBox from './components/ExplainBox';
-import Footer from './components/Footer';
-import ScrollMotion from './components/ScrollMotion';
-import BanDMoving from './components/BanDMoving';
+import MainTop from './components/mainTop/MainTop';
+import ExplainBox from './components/explainBox/ExplainBox';
+import Footer from './components/footer/Footer';
+import ScrollMotion from './components/scrollMotion/ScrollMotion';
+import BanDMoving from './components/banDMoving/BanDMoving';
 
 import RESEARCH from '../../assets/main/main-research.svg';
 import DASHBOARD from '../../assets/main/main-dashboard.svg';
 import CARD from '../../assets/main/main-card.svg';
 import MEMORY from '../../assets/main/main-memory.svg';
+import ARROW from '@/assets/main/scrollArrow.svg';
 
 import { vw } from '@/utils/units';
+import { useEffect, useState } from 'react';
 
 const MainPage = () => {
+  const [showScrollImg, setShowScrollImg] = useState(false);
+
+  const handleScrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > window.innerHeight * 0.2) {
+        setShowScrollImg(true);
+      } else {
+        setShowScrollImg(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <div className={s.mainContainer}>
       <MainTop />
@@ -92,6 +116,10 @@ const MainPage = () => {
       <ScrollMotion>
         <Footer />
       </ScrollMotion>
+
+      {showScrollImg && (
+        <img src={ARROW} className={s.arrowImg} onClick={handleScrollTop} />
+      )}
     </div>
   );
 };
