@@ -2,10 +2,10 @@
   @include flex(column, $gap: vw(20px));
 
   .chartLabelContainer {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: vw(10px);
+    width: 90%;
+    @include flex($gap: vw(70px));
+    row-gap: vw(12px);
+    flex-wrap: wrap;
     .chartLabel {
       @include flex($gap: vw(10px));
       .colorBox {
