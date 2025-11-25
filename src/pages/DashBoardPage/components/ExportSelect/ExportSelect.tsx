@@ -76,7 +76,7 @@ const customStyles: StylesConfig<OptionType, false> = {
 };
 
 interface ExportSelectProps {
-  setExportType: (type: string) => void;
+  setExportType?: (type: string) => void;
 }
 
 export const ExportSelect = ({ setExportType }: ExportSelectProps) => {
@@ -85,7 +85,7 @@ export const ExportSelect = ({ setExportType }: ExportSelectProps) => {
   >(exportOptions[0]);
 
   const handleExportChange = (option: SingleValue<OptionType>) => {
-    if (option) {
+    if (option && setExportType) {
       setSelectedExportOption(option);
       setExportType(option.value);
     }
