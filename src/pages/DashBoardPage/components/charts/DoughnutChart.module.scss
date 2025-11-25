@@ -64,3 +64,11 @@
     }
   }
 }
+
+.emptyState {
+  color: rgba($color-white, 1);
+  font-size: vw(24px);
+  font-weight: 500;
+  line-height: 120%; /* 28.8px */
+  letter-spacing: -0.6px;
+}
