@@ -1,10 +1,10 @@
-import s from './MainPage.module.scss';
+import s from './styles/MainPage.module.scss';
 
-import MainTop from './components/MainTop';
-import ExplainBox from './components/ExplainBox';
-import Footer from './components/Footer';
-import ScrollMotion from './components/ScrollMotion';
-import BanDMoving from './components/BanDMoving';
+import MainTop from './components/mainTop/MainTop';
+import ExplainBox from './components/explainBox/ExplainBox';
+import Footer from './components/footer/Footer';
+import ScrollMotion from './components/scrollMotion/ScrollMotion';
+import BanDMoving from './components/banDMoving/BanDMoving';
 
 import RESEARCH from '../../assets/main/main-research.svg';
 import DASHBOARD from '../../assets/main/main-dashboard.svg';

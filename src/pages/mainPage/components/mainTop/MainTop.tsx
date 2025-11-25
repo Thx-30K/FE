@@ -1,4 +1,4 @@
-import s from '../styles/MainTop.module.scss';
+import s from './MainTop.module.scss';
 import { SearchBar } from '@/components/SearchBar/SearchBar';
 
 import LOGO from '@/assets/logo.svg';

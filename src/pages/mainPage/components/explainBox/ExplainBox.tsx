@@ -1,5 +1,5 @@
-import s from '../styles/ExplainBox.module.scss';
-import ScrollMotion from './ScrollMotion';
+import s from './ExplainBox.module.scss';
+import ScrollMotion from '../scrollMotion/ScrollMotion';
 
 interface ExplainBoxProps {
   mainText: string;
