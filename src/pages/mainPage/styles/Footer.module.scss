@@ -13,24 +13,8 @@
     white-space: pre-line;
   }
 
-  .footerLeft {
-    display: flex;
-    align-items: center;
-    gap: vw(70px);
-
-    .footerImg {
-      width: vw(529px);
-      height: vw(158px);
-    }
-  }
-
-  .footerRight {
-    padding-right: vw(120px);
-
-    .arrowImg {
-      width: vw(124px);
-      height: vw(124px);
-      cursor: pointer;
-    }
+  .footerImg {
+    width: vw(529px);
+    height: vw(158px);
   }
 }

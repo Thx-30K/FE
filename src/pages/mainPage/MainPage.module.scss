@@ -5,3 +5,12 @@
     no-repeat;
   aspect-ratio: 1920 / 6893;
 }
+
+.arrowImg {
+  position: fixed;
+  bottom: vw(40px);
+  right: vw(40px);
+  width: vw(100px);
+  height: vw(100px);
+  cursor: pointer;
+}

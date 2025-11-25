@@ -10,10 +10,18 @@ import RESEARCH from '../../assets/main/main-research.svg';
 import DASHBOARD from '../../assets/main/main-dashboard.svg';
 import CARD from '../../assets/main/main-card.svg';
 import MEMORY from '../../assets/main/main-memory.svg';
+import ARROW from '@/assets/main/scrollArrow.svg';
 
 import { vw } from '@/utils/units';
 
 const MainPage = () => {
+  const handleScrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <div className={s.mainContainer}>
       <MainTop />
@@ -92,6 +100,8 @@ const MainPage = () => {
       <ScrollMotion>
         <Footer />
       </ScrollMotion>
+
+      <img src={ARROW} className={s.arrowImg} onClick={handleScrollTop} />
     </div>
   );
 };
