@@ -26,3 +26,9 @@ export interface ScenarioPayload {
   scenarioType: string;
   originalPanels: number;
 }
+
+export const LABEL_MAP: { [key: string]: string } = {
+  STAT: '기초 통계형',
+  CORRELATION: '성향 연관형',
+  SECONDARY: '파생 인사이트형',
+};
