@@ -4,7 +4,7 @@ import { LineAreaChart } from '../charts/LineAreaChart';
 import styles from './CardDetail.module.scss';
 import { cardCloseIcon } from '@/assets';
 import { ExportSelect } from '../ExportSelect/ExportSelect';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { PanelTable } from '../Table/PanelTable';
 import { CardDetailSkeleton } from './CardDetailSkeleton';
 import { formatReportText } from '@/utils/textFormat';
@@ -16,6 +16,7 @@ export const CardDetail = ({
   onClick,
   panelSize,
   originLineChartData,
+  clickVisible,
 }: CardProps) => {
   const {
     data: detailData,
@@ -33,6 +34,8 @@ export const CardDetail = ({
     staleTime: 1000 * 60 * 10, // 10분간 캐시 유지
   });
 
+  const [show, setShow] = useState(false);
+
   // 차트 관련 데이터 매핑
   const stats = detailData?.demographicsStats?.stats;
   const entry = stats ? Object.entries(stats)[0] : null;
@@ -44,13 +47,28 @@ export const CardDetail = ({
     }
   }, [isError, onClick]);
 
+  useEffect(() => {
+    if (clickVisible) {
+      setTimeout(() => setShow(true), 50);
+    }
+  }, [clickVisible]);
+
+  const delayOnClick = () => {
+    setShow(false);
+    setTimeout(() => onClick(), 150);
+  };
+
   if (isPending) {
-    return <CardDetailSkeleton data={data} onClick={onClick} />;
+    return (
+      <div className={`${styles.container} ${show && styles.show}`}>
+        <CardDetailSkeleton data={data} onClick={delayOnClick} />
+      </div>
+    );
   }
 
   return (
-    <div className={styles.container}>
-      <div className={styles.closeButton} onClick={onClick}>
+    <div className={`${styles.container} ${show && styles.show}`}>
+      <div className={styles.closeButton} onClick={delayOnClick}>
         <img src={cardCloseIcon} alt="cancel" />
       </div>
       <div className={styles.cardContainer}>

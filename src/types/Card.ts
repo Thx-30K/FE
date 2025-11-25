@@ -11,6 +11,7 @@ export interface CardProps {
   onClick: () => void;
   panelSize?: number;
   originLineChartData?: Record<string, number>;
+  clickVisible?: boolean;
 }
 
 // 시나리오 상세 데이터 객체
