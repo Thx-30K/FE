@@ -1,18 +1,35 @@
 .footerContainer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: vw(400px);
   padding: vw(93px) 0 vw(150px) vw(120px);
   gap: vw(63px);
 
-  p {
+  .footerText {
     font-weight: 500;
     font-size: vw(20px);
     color: $color-white;
+    white-space: pre-line;
   }
 
-  .footerImg {
-    width: vw(529px);
-    height: vw(158px);
+  .footerLeft {
+    display: flex;
+    align-items: center;
+    gap: vw(70px);
+
+    .footerImg {
+      width: vw(529px);
+      height: vw(158px);
+    }
+  }
+
+  .footerRight {
+    padding-right: vw(120px);
+
+    .arrowImg {
+      width: vw(124px);
+      height: vw(124px);
+    }
   }
 }
