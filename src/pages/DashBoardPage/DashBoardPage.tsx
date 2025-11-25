@@ -15,6 +15,7 @@ import { DashboardSkeleton } from './components/DashboardSkeleton/DashboardSkele
 import { useQuery } from '@tanstack/react-query';
 import { fetchDashboardData } from '@/apis/dashboard';
 import { handleExport } from '@/utils/export';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export const DashBoardPage = () => {
   const nav = useNavigate();
@@ -58,17 +59,41 @@ export const DashBoardPage = () => {
   return (
     <div className={styles.container}>
       {/* 카드 클릭 시 */}
-      {cardDetailVisible && cardDetailNumber !== null && (
-        <CardDetail
-          data={dashboardData?.scenarios[cardDetailNumber]}
-          onClick={() => {
-            setCardDetailVisible(false);
-            setCardDetailNumber(null);
-          }}
-          panelSize={dashboardData?.panelDetails.length}
-          originLineChartData={dashboardData?.monthlyIncomeStats.incomeRatios}
-        />
-      )}
+      <AnimatePresence mode="popLayout">
+        {cardDetailVisible && cardDetailNumber !== null && (
+          <motion.div
+            initial={{
+              opacity: 0,
+            }}
+            animate={{
+              opacity: 1,
+            }}
+            exit={{
+              opacity: 0,
+            }}
+            transition={{
+              duration: 0.2,
+              ease: 'easeInOut',
+            }}
+            style={{
+              zIndex: 2,
+            }}
+          >
+            <CardDetail
+              data={dashboardData?.scenarios[cardDetailNumber]}
+              onClick={() => {
+                setCardDetailVisible(false);
+                setCardDetailNumber(null);
+              }}
+              panelSize={dashboardData?.panelDetails.length}
+              originLineChartData={
+                dashboardData?.monthlyIncomeStats.incomeRatios
+              }
+              clickVisible={cardDetailVisible}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* 검색 및 카드 영역 */}
       <div className={styles.topContent}>
         <img
