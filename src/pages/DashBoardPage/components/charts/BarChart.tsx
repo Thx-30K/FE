@@ -34,6 +34,9 @@ const options: ChartOptions<'bar'> = {
     },
   },
   plugins: {
+    datalabels: {
+      display: false,
+    },
     legend: {
       display: false,
     },

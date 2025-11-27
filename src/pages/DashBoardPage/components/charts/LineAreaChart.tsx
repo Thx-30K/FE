@@ -30,6 +30,9 @@ ChartJS.register(
 const options: ChartOptions<'line'> = {
   responsive: true,
   plugins: {
+    datalabels: {
+      display: false,
+    },
     legend: {
       display: false,
     },
