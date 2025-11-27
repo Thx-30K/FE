@@ -11,7 +11,9 @@ import { Doughnut } from 'react-chartjs-2';
 import styles from './DoughnutChart.module.scss';
 import type { DoughnutChartProps } from '@/types/Chart';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
+ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
 // 차트 옵션 설정(제네릭으로 차트 타입 지정)
 const options: ChartOptions<'doughnut'> = {
@@ -28,6 +30,22 @@ const options: ChartOptions<'doughnut'> = {
     },
     title: {
       display: false,
+    },
+    datalabels: {
+      formatter: (value, context) => {
+        // 데이터셋의 총합을 구함
+        const datapoints = context.chart.data.datasets[0].data;
+        const total = datapoints.reduce(
+          (total, datapoint) => (total as number) + (datapoint as number),
+          0,
+        ) as number;
+        // 퍼센트 계산
+        const percentage = ((value / total) * 100).toFixed(1);
+        // 5% 미만은 표시하지 않음 (선택사항 - 글자가 겹치는 것 방지)
+        return parseFloat(percentage) > 5 ? `${percentage}%` : '';
+      },
+      color: '#fff',
+      font: { size: 16, weight: 'bold' },
     },
   },
 };
