@@ -37,7 +37,8 @@ export const DashBoardPage = () => {
     queryKey: ['dashboard', query], // query 변경시 자동 재호출
     queryFn: () => fetchDashboardData(query!),
     enabled: !!query,
-    staleTime: 1000 * 60 * 10, // 10분간 데이터 신선함 유지
+    staleTime: Infinity,
+    gcTime: Infinity,
     retry: 1, // 실패 시 1회 재시도
   });
 
@@ -54,7 +55,7 @@ export const DashBoardPage = () => {
       }
       return 0;
     },
-
+    gcTime: Infinity,
     //  25초마다 폴링, complete가 true면 중단
     refetchInterval: (query) => {
       const data = query.state.data;
