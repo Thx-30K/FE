@@ -152,6 +152,11 @@
             height: 100%;
             color: $color-white;
             padding: vw(50px) vw(30px) 0 vw(30px);
+            overflow-y: auto;
+            -ms-overflow-style: none;
+            &::-webkit-scrollbar {
+              display: none;
+            }
             .cardTextTitle {
               font-size: vw(30px);
               font-weight: 700;

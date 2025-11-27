@@ -2,6 +2,6 @@
 export const formatReportText = (text?: string) => {
   if (!text) return '';
   const lines = text.split('\n');
-  const bodyText = lines.slice(1).join('\n').trim();
+  const bodyText = lines.join('\n').trim();
   return bodyText.replace(/["'”“]/g, '').trim();
 };
