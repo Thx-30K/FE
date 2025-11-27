@@ -1,6 +1,6 @@
 import type { SurveyResponse } from '@/types/Dashboard';
 import { api } from './instance';
-import type { ScenarioPayload } from '@/types/Card';
+import type { ImageStatusResponse, ScenarioPayload } from '@/types/Card';
 
 // 시나리오 상세 데이터 조회 함수
 export const fetchScenarioDetail = async (payload: ScenarioPayload) => {
@@ -27,4 +27,12 @@ export const fetchPanelModalData = async (panelId: number) => {
     throw new Error('Failed to fetch data');
   }
   return data.data; // 실제 데이터(SurveyResultData)만 반환
+};
+
+// 이미지 생성 요청 함수
+export const fetchImageStatus = async (batchId: string) => {
+  const response = await api.get<ImageStatusResponse>('/api/querys/images', {
+    params: { batchId },
+  });
+  return response.data;
 };

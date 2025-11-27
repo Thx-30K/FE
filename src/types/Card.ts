@@ -28,6 +28,15 @@ export interface ScenarioPayload {
   originalPanels: number;
 }
 
+// 이미지 생성 상태 응답 타입
+export interface ImageStatusResponse {
+  isSuccess: boolean;
+  data: {
+    complete: boolean;
+    detail: { index: number; imageUrl: string }[] | null;
+  };
+}
+
 export const LABEL_MAP: { [key: string]: string } = {
   STAT: '기초 통계형',
   CORRELATION: '성향 연관형',

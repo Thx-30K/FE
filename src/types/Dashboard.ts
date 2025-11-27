@@ -37,6 +37,7 @@ export interface DemographicsStats {
 
 // 데이터 객체
 export interface SurveyResultData {
+  batchId: string;
   tags: string[];
   scenarios: Scenario[];
   demographicsStats: DemographicsStats;
