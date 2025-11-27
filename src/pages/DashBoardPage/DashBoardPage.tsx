@@ -13,9 +13,10 @@ import type { SurveyResultData } from '@/types/Dashboard';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DashboardSkeleton } from './components/DashboardSkeleton/DashboardSkeleton';
 import { useQuery } from '@tanstack/react-query';
-import { fetchDashboardData } from '@/apis/dashboard';
+import { fetchDashboardData, fetchImageStatus } from '@/apis/dashboard';
 import { handleExport } from '@/utils/export';
 import { AnimatePresence, motion } from 'framer-motion';
+import type { ImageStatusResponse } from '@/types/Card';
 
 export const DashBoardPage = () => {
   const nav = useNavigate();
@@ -38,6 +39,27 @@ export const DashBoardPage = () => {
     enabled: !!query,
     staleTime: 1000 * 60 * 10, // 10분간 데이터 신선함 유지
     retry: 1, // 실패 시 1회 재시도
+  });
+
+  const batchId = dashboardData?.batchId; // 이미지 추출에 필요한 batchId
+
+  const { data: imageData } = useQuery<ImageStatusResponse>({
+    queryKey: ['dashboardImages', batchId], // batchId가 바뀌면 새로운 쿼리
+    queryFn: () => fetchImageStatus(batchId!),
+    enabled: !!batchId, // batchId가 확보된 후에만 실행
+
+    //  25초마다 폴링, complete가 true면 중단
+    refetchInterval: (query) => {
+      const data = query.state.data;
+      // 데이터가 있고 생성이 완료되었다면 폴링 중지
+      if (data?.data?.complete) {
+        return false;
+      }
+      // 완료되지 않았다면 설정 시간 간격으로 재호출
+      return 25000;
+    },
+    // 백그라운드에 있어도 이미지 생성을 계속 확인하려면 true 설정
+    refetchIntervalInBackground: true,
   });
 
   useEffect(() => {
@@ -120,16 +142,23 @@ export const DashBoardPage = () => {
             이런 패널들은 어때요?
           </div>
           <div className={styles.cardList}>
-            {dashboardData?.scenarios.map((data, i) => (
-              <Card
-                key={i}
-                data={data}
-                onClick={() => {
-                  setCardDetailVisible(true);
-                  setCardDetailNumber(i);
-                }}
-              />
-            ))}
+            {dashboardData?.scenarios.map((data, i) => {
+              const scenarioImage = imageData?.data?.detail?.find(
+                (img) => img.index === i,
+              )?.imageUrl;
+
+              return (
+                <Card
+                  key={i}
+                  data={data}
+                  imageUrl={scenarioImage}
+                  onClick={() => {
+                    setCardDetailVisible(true);
+                    setCardDetailNumber(i);
+                  }}
+                />
+              );
+            })}
           </div>
         </div>
       </div>
