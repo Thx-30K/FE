@@ -48,6 +48,13 @@ export const DashBoardPage = () => {
     queryFn: () => fetchImageStatus(batchId!),
     enabled: !!batchId, // batchId가 확보된 후에만 실행
 
+    staleTime: (query) => {
+      if (query.state.data?.data?.complete) {
+        return Infinity;
+      }
+      return 0;
+    },
+
     //  25초마다 폴링, complete가 true면 중단
     refetchInterval: (query) => {
       const data = query.state.data;
