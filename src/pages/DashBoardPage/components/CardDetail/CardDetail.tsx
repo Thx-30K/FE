@@ -10,6 +10,7 @@ import { CardDetailSkeleton } from './CardDetailSkeleton';
 import { formatReportText } from '@/utils/textFormat';
 import { useQuery } from '@tanstack/react-query';
 import { fetchScenarioDetail } from '@/apis/dashboard';
+import { handleExport } from '@/utils/export';
 
 export const CardDetail = ({
   data,
@@ -35,6 +36,8 @@ export const CardDetail = ({
   });
 
   const [show, setShow] = useState(false);
+
+  const [exportType, setExportType] = useState<string>('xlsx');
 
   // 차트 관련 데이터 매핑
   const stats = detailData?.demographicsStats?.stats;
@@ -126,8 +129,18 @@ export const CardDetail = ({
               검색된 패널 : {detailData?.panelDetails.length}명
             </span>
             <div className={styles.exportContainer}>
-              <ExportSelect />
-              <div className={styles.exportButton}>내보내기</div>
+              <ExportSelect setExportType={setExportType} />
+              <div
+                className={styles.exportButton}
+                onClick={() =>
+                  handleExport({
+                    panelDetails: detailData?.panelDetails || [],
+                    exportType: exportType,
+                  })
+                }
+              >
+                내보내기
+              </div>
             </div>
           </div>
           <PanelTable panelDetails={detailData?.panelDetails} />
